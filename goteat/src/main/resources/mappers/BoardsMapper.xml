@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="javaeatsong.goteat.repository.BoardsMapper">
+	<select id="selectAll"
+		resultType="javaeatsong.goteat.model.Boards">
+		SELECT * FROM boards ORDER BY id DESC;
+	</select>
+
+	<select id="selectOne" parameterType="int"
+		resultType="javaeatsong.goteat.model.Boards">
+		SELECT * FROM boards WHERE id = #{id};
+	</select>
+
+	<insert id="insert"
+		parameterType="javaeatsong.goteat.model.Boards">
+		INSERT INTO boards(id, user_id, category_id , item_name , headcnt ,
+		remain_headcnt , quantity , scale , total_price , meeting_location ,
+		meeting_time , is_up , item_image1 , item_image2 , receipt_image ,
+		latitude , longitude , is_reusable , is_finished)
+		VALUES(#{id}, #{userId}, #{categoryId}, #{itemName}, #{headcnt},
+		#{remainHeadcnt}, #{quantity}, #{scale}, #{totalPrice},
+		#{meetingLocation}, #{meetingTime}, #{isUp}, #{itemImage1},
+		#{itemImage2}, #{receiptImage}, #{latitude}, #{longitude},
+		#{isReusable}, #{isFinished})
+	</insert>
+</mapper>
