@@ -8,9 +8,9 @@ import javaeatsong.goteat.model.Scraps;
 
 @Mapper
 public interface ScrapsMapper {
-	List<Scraps> selectAll() throws Exception;
+	List<Scraps> selectList() throws Exception;
 
-	Scraps selectOne(int id) throws Exception;
+	Scraps select(int id) throws Exception;
 
 	void insert(Scraps param) throws Exception;
 

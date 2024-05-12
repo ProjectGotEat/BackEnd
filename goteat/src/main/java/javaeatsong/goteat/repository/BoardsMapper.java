@@ -8,9 +8,9 @@ import javaeatsong.goteat.model.Boards;
 
 @Mapper
 public interface BoardsMapper {
-	List<Boards> selectAll() throws Exception;
+	List<Boards> selectList() throws Exception;
 
-	Boards selectOne(int id) throws Exception;
+	Boards select(int id) throws Exception;
 
 	void insert(Boards param) throws Exception;
 

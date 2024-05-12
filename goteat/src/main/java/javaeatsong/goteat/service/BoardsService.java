@@ -17,7 +17,7 @@ public class BoardsService {
 
 	// 참고용 테스트 코드. 삭제 가능
 	public List<Boards> getBoardsAll() throws Exception {
-		List<Boards> boardsList = boardsMapper.selectAll();
+		List<Boards> boardsList = boardsMapper.selectList();
 		return boardsList;
 	}
 
@@ -47,7 +47,7 @@ public class BoardsService {
 
 	// 참고용 테스트 코드. 삭제 가능
 	public Boards getBoard(int id) throws Exception {
-		return boardsMapper.selectOne(id);
+		return boardsMapper.select(id);
 	}
 
 }

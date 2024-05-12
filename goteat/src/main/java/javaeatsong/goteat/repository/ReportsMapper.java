@@ -8,9 +8,9 @@ import javaeatsong.goteat.model.Reports;
 
 @Mapper
 public interface ReportsMapper {
-	List<Reports> selectAll() throws Exception;
+	List<Reports> selectList() throws Exception;
 
-	Reports selectOne(int id) throws Exception;
+	Reports select(int id) throws Exception;
 
 	void insert(Reports param) throws Exception;
 

@@ -8,9 +8,9 @@ import javaeatsong.goteat.model.PointHistories;
 
 @Mapper
 public interface PointHistoriesMapper {
-	List<PointHistories> selectAll() throws Exception;
+	List<PointHistories> selectList() throws Exception;
 
-	PointHistories selectOne(int id) throws Exception;
+	PointHistories select(int id) throws Exception;
 
 	void insert(PointHistories param) throws Exception;
 

@@ -8,9 +8,9 @@ import javaeatsong.goteat.model.Users;
 
 @Mapper
 public interface UsersMapper {
-	List<Users> selectAll() throws Exception;
+	List<Users> selectList() throws Exception;
 
-	Users selectOne(int id) throws Exception;
+	Users select(int id) throws Exception;
 
 	void insert(Users param) throws Exception;
 

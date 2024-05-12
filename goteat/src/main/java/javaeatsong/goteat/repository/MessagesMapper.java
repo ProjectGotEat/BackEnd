@@ -8,9 +8,9 @@ import javaeatsong.goteat.model.Messages;
 
 @Mapper
 public interface MessagesMapper {
-	List<Messages> selectAll() throws Exception;
+	List<Messages> selectList() throws Exception;
 
-	Messages selectOne(int id) throws Exception;
+	Messages select(int id) throws Exception;
 
 	void insert(Messages param) throws Exception;
 

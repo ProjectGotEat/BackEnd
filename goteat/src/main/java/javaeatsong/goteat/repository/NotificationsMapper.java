@@ -8,9 +8,9 @@ import javaeatsong.goteat.model.Notifications;
 
 @Mapper
 public interface NotificationsMapper {
-	List<Notifications> selectAll() throws Exception;
+	List<Notifications> selectList() throws Exception;
 
-	Notifications selectOne(int id) throws Exception;
+	Notifications select(int id) throws Exception;
 
 	void insert(Notifications param) throws Exception;
 

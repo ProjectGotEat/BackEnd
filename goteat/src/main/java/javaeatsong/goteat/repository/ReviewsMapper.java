@@ -8,9 +8,9 @@ import javaeatsong.goteat.model.Reviews;
 
 @Mapper
 public interface ReviewsMapper {
-	List<Reviews> selectAll() throws Exception;
+	List<Reviews> selectList() throws Exception;
 
-	Reviews selectOne(int id) throws Exception;
+	Reviews select(int id) throws Exception;
 
 	void insert(Reviews param) throws Exception;
 

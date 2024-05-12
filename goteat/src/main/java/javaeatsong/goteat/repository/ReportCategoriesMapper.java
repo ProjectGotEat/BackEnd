@@ -8,9 +8,9 @@ import javaeatsong.goteat.model.ReportCategories;
 
 @Mapper
 public interface ReportCategoriesMapper {
-	List<ReportCategories> selectAll() throws Exception;
+	List<ReportCategories> selectList() throws Exception;
 
-	ReportCategories selectOne(int id) throws Exception;
+	ReportCategories select(int id) throws Exception;
 
 	void insert(ReportCategories param) throws Exception;
 
