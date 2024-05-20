@@ -60,14 +60,14 @@
 
 	<insert id="insert"
 		parameterType="javaeatsong.goteat.model.Boards">
-		INSERT INTO boards(id, user_id, category_id , item_name , headcnt ,
+		INSERT INTO boards(user_id, category_id , item_name , headcnt ,
 		remain_headcnt , quantity , scale , total_price , meeting_location ,
 		meeting_time , is_up , item_image1 , item_image2 , receipt_image ,
-		latitude , longitude , is_reusable , is_finished)
-		VALUES(#{id}, #{userId}, #{categoryId}, #{itemName}, #{headcnt},
+		latitude , longitude , is_reusable)
+		VALUES(#{userId}, #{categoryId}, #{itemName}, #{headcnt},
 		#{remainHeadcnt}, #{quantity}, #{scale}, #{totalPrice},
 		#{meetingLocation}, #{meetingTime}, #{isUp}, #{itemImage1},
 		#{itemImage2}, #{receiptImage}, #{latitude}, #{longitude},
-		#{isReusable}, #{isFinished})
+		#{isReusable})
 	</insert>
 </mapper>
