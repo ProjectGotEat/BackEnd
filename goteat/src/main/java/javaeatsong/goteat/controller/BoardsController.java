@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javaeatsong.goteat.service.BoardsService;
 
@@ -32,4 +33,11 @@ public class BoardsController {
 			@RequestParam("categories") List<String> categories, @RequestHeader HttpHeaders header) throws Exception {
 		return boardsService.getBoard(header.getFirst("uid"), keyword, categories);
 	}
+	
+	@GetMapping("/board/{id}")
+	public HashMap<String, Object> getBoardDetail(@PathVariable("id") int bid,
+			@RequestHeader("uid") String uid) throws Exception {
+		return boardsService.getBoardDetail(uid, bid);
+	}
+
 }

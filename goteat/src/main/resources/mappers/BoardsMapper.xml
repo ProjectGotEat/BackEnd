@@ -26,6 +26,32 @@
    		</if>
 		ORDER BY b.id DESC;
 	</select>
+	
+	<select id="selectDetail" resultType="Map">
+        SELECT
+            b.item_image1,
+            b.item_image2,
+            b.receipt_image,
+            b.created_at,
+            u.image AS user_image,
+            u.profile_name AS user_nickname,
+            u.rank AS user_rank,
+            bc.content AS category,
+            b.item_name,
+            b.scale,
+            CAST(b.quantity / b.headcnt AS SIGNED INTEGER) AS each_quantity,
+            CAST(b.total_price / b.headcnt AS SIGNED INTEGER) AS each_price,
+            b.meeting_location,
+            b.meeting_time,
+            b.latitude,
+            b.longitude,
+            b.is_finished,
+            b.is_reusable
+        FROM boards b
+        JOIN users u ON b.user_id = u.id
+        JOIN board_categories bc ON b.category_id = bc.id
+        WHERE b.id = #{id}
+    </select>
 
 	<select id="select" parameterType="int"
 		resultType="javaeatsong.goteat.model.Boards">

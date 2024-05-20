@@ -19,4 +19,8 @@ public class BoardsService {
 		return boardsMapper.selectList(uid, keyword, categories);
 	}
 
+	public HashMap<String, Object> getBoardDetail(String uid, int bid)
+			throws Exception {
+		return boardsMapper.selectDetail(uid, bid);
+	}
 }
