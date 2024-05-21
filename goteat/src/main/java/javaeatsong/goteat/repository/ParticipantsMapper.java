@@ -8,13 +8,8 @@ import javaeatsong.goteat.model.Participants;
 
 @Mapper
 public interface ParticipantsMapper {
-	List<Participants> selectList() throws Exception;
+	List<HaschMap<String, Object>> selectList(@Param("uid") int uid) throws Exception;
 
 	Participants select(int id) throws Exception;
 
-	void insert(Participants param) throws Exception;
-
-	void update(Participants param) throws Exception;
-
-	void delete(Participants param) throws Exception;
 }
