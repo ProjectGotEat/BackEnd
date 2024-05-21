@@ -4,11 +4,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import javaeatsong.goteat.model.Participants;
 import javaeatsong.goteat.service.ParticipantsService;
 
 import java.util.List;
+import java.util.HashMap;
 
 @RestController
 @MapperScan(basePackages = "javaeatsong.goteat.repository") // 탐색할 패키지 설정
@@ -23,7 +25,7 @@ public class ParticipantsController {
 	// 내가 주최한 소분 전체 조회
 	@GetMapping("/participant/organize")
 	public List<HashMap<String, Object>> getPariticpantsOrganized(@RequestHeader("uid") int uid) throws Exception {
-		return participantsService.getParticipantsOrganized(uid)
+		return participantsService.getParticipantsOrganized(uid);
 	}
 
 }
