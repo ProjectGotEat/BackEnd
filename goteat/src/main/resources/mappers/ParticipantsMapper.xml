@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="javaeatsong.goteat.repository.BoardsMapper">
-    <select id="selectListByUserId" resultType="Map">
-        SELECT *
+<mapper namespace="javaeatsong.goteat.repository.ParticipantsMapper">
+    <select id="selectListByOrganizerId" resultType="Map">
+        SELECT item_name, quantity, headcnt, scale, meeting_time, participant_id, content
         FROM
-            (SELECT b.item_name,
-                   b.meeting_time,
-                   m.content,
-                   ROW_NUMBER() OVER(PARTITION BY m.participant_id ORDER BY p.created_at DESC) AS date_rank
+            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
+                    m.participant_id, m.content,
+                   ROW_NUMBER() OVER(PARTITION BY m.participant_id ORDER BY m.created_at DESC) AS date_rank
             FROM participants p
             JOIN messages m
                 ON p.id = m.participant_id
             JOIN boards b
                 ON p.board_id = b.id
-            WHERE p.organizer_id = uid
-                AND b.is_finished = false)
-        WHERE TRUE
-            AND date_rank = 1;
+            WHERE p.organizer_id = #{uid}
+                AND b.is_finished = false) organizer_boards
+        WHERE date_rank = 1
+        ORDER BY participant_id DESC;
     </select>
 </mapper>

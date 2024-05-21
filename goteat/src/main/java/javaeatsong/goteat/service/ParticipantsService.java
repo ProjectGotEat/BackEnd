@@ -18,7 +18,7 @@ public class ParticipantsService {
 	
 	// 내가 주최한 소분 전체 조회
 	public List<HashMap<String, Object>> getParticipantsOrganized(int uid) throws Exception {
-		List<HashMap<String, Object>> participantsList = participantsMapper.selectList(uid);
+		List<HashMap<String, Object>> participantsList = participantsMapper.selectListByOrganizerId(uid);
 		return participantsList;
 	}
 
