@@ -17,4 +17,21 @@
         WHERE date_rank = 1
         ORDER BY participant_id DESC;
     </select>
+
+    <select id="selectListByUserId" resultType="Map">
+        SELECT item_name, quantity, headcnt, scale, meeting_time, participant_id, content
+        FROM
+            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
+                    m.participant_id, m.content,
+                    ROW_NUMBER() OVER(PARTITION BY m.participant_id ORDER BY m.created_at DESC) AS date_rank
+             FROM participants p
+                      JOIN messages m
+                           ON p.id = m.participant_id
+                      JOIN boards b
+                           ON p.board_id = b.id
+             WHERE p.user_id = #{uid}
+               AND (p.is_success = 0 AND p.is_failed = 0)) organizer_boards
+        WHERE date_rank = 1
+        ORDER BY participant_id DESC;
+    </select>
 </mapper>

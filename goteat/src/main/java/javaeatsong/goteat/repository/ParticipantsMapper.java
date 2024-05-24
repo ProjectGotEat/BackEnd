@@ -12,6 +12,8 @@ import javaeatsong.goteat.model.Participants;
 public interface ParticipantsMapper {
 	List<HashMap<String, Object>> selectListByOrganizerId(@Param("uid") int uid) throws Exception;
 
+	List<HashMap<String, Object>> selectListByUserId(@Param("uid") int uid) throws Exception;
+
 	Participants select(int id) throws Exception;
 
 }

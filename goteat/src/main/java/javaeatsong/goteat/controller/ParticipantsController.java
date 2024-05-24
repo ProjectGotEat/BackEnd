@@ -28,4 +28,9 @@ public class ParticipantsController {
 		return participantsService.getParticipantsOrganized(uid);
 	}
 
+	// 내가 참여한 소분 전체 조회
+	@GetMapping("/participant/participate")
+	public List<HashMap<String, Object>> getParticipantsParticipating(@RequestHeader("uid") int uid) throws Exception {
+		return participantsService.getParticipantsParticipating(uid);
+	}
 }
