@@ -13,7 +13,7 @@
             JOIN boards b
                 ON p.board_id = b.id
             WHERE p.organizer_id = #{uid}
-                AND b.is_finished = false) organizer_boards
+                AND (p.is_success = 0 and p.is_failed = 0) = false) organizer_boards
         WHERE date_rank = 1
         ORDER BY participant_id DESC;
     </select>
