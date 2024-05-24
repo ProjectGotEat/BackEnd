@@ -35,7 +35,7 @@ public class ParticipantsService {
 			HashMap<String, Object> participant = new HashMap<String, Object>();
 			participant.put("title", title);
 			participant.put("meeting_time", meeting_time);
-			participant.put("content", content);
+			participant.put("message", content);
 
 			data.add(participant);
 		};
