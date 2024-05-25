@@ -15,8 +15,7 @@ public class ScrapsService {
 	@Autowired
 	private ScrapsMapper scrapsMapper;
 
-	public List<HashMap<String, Object>> getScrap(String uid)
-			throws Exception {
+	public List<HashMap<String, Object>> getScrap(String uid) throws Exception {
 		return scrapsMapper.selectList(uid);
 	}
 

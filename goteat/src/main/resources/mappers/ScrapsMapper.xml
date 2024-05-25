@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="javaeatsong.goteat.repository.ScrapsMapper">
-	<select id="selectList" resultType="Map">
-		SELECT	b.id,
-				b.item_name,
-        		b.quantity,
-        		b.scale,
-        		CAST(b.quantity / b.headcnt AS SIGNED INTEGER) AS each_quantity,
-        		CAST(b.total_price / b.headcnt AS SIGNED INTEGER) AS each_price,
-        		b.meeting_location,
-        		b.headcnt,
-        		b.headcnt - b.remain_headcnt AS participants_headcnt,
-        		bc.content AS category,
-        		b.is_finished,
-        		IF(s.board_id IS NOT NULL, 1, 0) AS is_scraped
-		FROM boards b
-		JOIN board_categories bc ON b.category_id = bc.id
-		LEFT JOIN scraps s ON b.id = s.board_id AND s.user_id = #{uid}
-		WHERE b.item_name LIKE CONCAT('%', #{keyword}, '%')
-		<if test="categories != null and !categories.isEmpty()">
-      	AND b.category_id IN
-      	<foreach item="category" collection="categories" open="(" separator="," close=")">
-          	#{category}
-      	</foreach>
-   		</if>
-		ORDER BY b.id DESC;
-	</select>
+	<select id="selectList" parameterType="string" resultType="hashmap">
+        SELECT 
+            b.id AS id,
+            b.item_name AS itemName,
+            b.quantity AS quantity,
+            b.scale AS scale,
+            CAST(b.quantity / b.headcnt AS SIGNED INTEGER) AS each_quantity,
+        	CAST(b.total_price / b.headcnt AS SIGNED INTEGER) AS each_price,
+            b.meeting_location AS meetingLocation,
+            b.headcnt AS headcnt,
+            b.headcnt - b.remain_headcnt AS participantsHeadcnt,
+            c.content AS category,
+            b.is_finished AS isFinished,
+            1 AS isScraped
+        FROM
+            scraps s
+        JOIN
+            boards b ON s.board_id = b.id
+        JOIN
+            board_categories c ON b.category_id = c.id
+        WHERE
+            s.user_id = #{uid}
+    </select>
 
 	<insert id="insert"
 		parameterType="javaeatsong.goteat.model.Scraps">
