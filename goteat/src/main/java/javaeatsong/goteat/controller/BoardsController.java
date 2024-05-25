@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -52,14 +53,13 @@ public class BoardsController {
 	@PostMapping("/board")
 	   public ResponseEntity<String> postBoard(@RequestBody Boards board, @RequestHeader("uid") String uid) throws Exception {
 			board.setUserId(Integer.valueOf(uid));
-			
-
-		    // 로깅
-		    Logger logger = LoggerFactory.getLogger(getClass());
-		    logger.info("Received board data: {}", board);
-		    
-		    
 			boardsService.postBoard(board);
 	       return ResponseEntity.status(HttpStatus.CREATED).body("Board created successfully");
     }
+	
+	@PutMapping("/board/{id}/request")
+	public ResponseEntity<String> decrementReaminHeadcnt(@PathVariable("id") int bid) throws Exception {
+		boardsService.decrementRemainHeadcnt(bid);
+       return ResponseEntity.status(HttpStatus.CREATED).body("Remain Headcnt decremented successfully");
+	}
 }

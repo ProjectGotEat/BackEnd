@@ -17,6 +17,8 @@ public interface BoardsMapper {
 	
 	Boards select(int id) throws Exception;
 
+    void decrementRemainHeadcnt(int bid) throws Exception;
+	
 	void insert(Boards param) throws Exception;
 
 	void update(Boards param) throws Exception;

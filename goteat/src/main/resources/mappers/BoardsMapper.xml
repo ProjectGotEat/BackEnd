@@ -70,4 +70,10 @@
 		#{itemImage2}, #{receiptImage}, #{latitude}, #{longitude},
 		#{isReusable})
 	</insert>
+	
+	<update id="decrementRemainHeadcnt">
+    UPDATE boards
+    SET remain_headcnt = remain_headcnt - 1
+    WHERE id = #{bid} AND remain_headcnt > 0
+	</update>
 </mapper>

@@ -28,4 +28,8 @@ public class BoardsService {
     public void postBoard(Boards board) throws Exception {
         boardsMapper.insert(board);
     }
+    
+    public void decrementRemainHeadcnt(int bid) throws Exception {
+        boardsMapper.decrementRemainHeadcnt(bid);
+    }
 }
