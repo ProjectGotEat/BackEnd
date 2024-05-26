@@ -10,7 +10,7 @@ import javaeatsong.goteat.model.Users;
 public interface UsersMapper {
 	List<Users> selectList() throws Exception;
 
-	Users select(int id) throws Exception;
+	Users select(String email) throws Exception;
 
 	void insert(Users param) throws Exception;
 
