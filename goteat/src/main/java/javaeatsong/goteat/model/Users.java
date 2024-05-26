@@ -1,5 +1,6 @@
 package javaeatsong.goteat.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class Users {
 	private String password;
 	private String rank;
 	private Integer point;
-	private Timestamp suspensionDate;
+	private Date suspensionDate;
 	private Integer notiAllow;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
@@ -91,11 +92,11 @@ public class Users {
 		this.point = point;
 	}
 
-	public Timestamp getSuspensionDate() {
+	public Date getSuspensionDate() {
 		return suspensionDate;
 	}
 
-	public void setSuspensionDate(Timestamp suspensionDate) {
+	public void setSuspensionDate(Date suspensionDate) {
 		this.suspensionDate = suspensionDate;
 	}
 

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javaeatsong.goteat.service.UserService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -35,5 +37,19 @@ public class UserController {
 		} else {
 			return ResponseEntity.status(HttpStatus.OK).body(responseMap);
 		}
+	}
+
+	@GetMapping("/user/point")
+	public ResponseEntity<List<HashMap<String, Object>>> getUserPoint(@RequestHeader HttpHeaders header)
+			throws Exception {
+		String uid = header.getFirst("uid");
+
+		if (uid == null || uid.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ArrayList<>());
+		}
+
+		List<HashMap<String, Object>> responseMapList = userService.getUserPoint(uid);
+
+		return ResponseEntity.status(HttpStatus.OK).body(responseMapList);
 	}
 }
