@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javaeatsong.goteat.model.Users;
 import javaeatsong.goteat.service.AuthService;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -26,6 +27,12 @@ public class AuthController {
 
 	@PostMapping("/auth/join")
 	public ResponseEntity<String> postAuthJoin(@RequestBody Map<String, ?> requestBody) throws Exception {
+		if (requestBody.get("name") == null || requestBody.get("profile_name") == null
+				|| requestBody.get("image") == null || requestBody.get("email") == null
+				|| requestBody.get("password") == null || requestBody.get("noti_allow") == null) {
+			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("request faild");
+		}
+
 		Users user = new Users();
 		user.setName(requestBody.get("name").toString());
 		user.setProfileName(requestBody.get("profile_name").toString());
@@ -42,15 +49,31 @@ public class AuthController {
 	}
 
 	@PostMapping("/auth/log-in")
-	public boolean postAuthLogin(@RequestBody Map<String, ?> requestBody) throws Exception {
+	public ResponseEntity<String> postAuthLogin(@RequestBody Map<String, ?> requestBody) throws Exception {
+		if (requestBody.get("email") == null || requestBody.get("password") == null) {
+			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("login faild");
+		}
+
 		String email = requestBody.get("email").toString();
 		String password = requestBody.get("password").toString();
 
-		return authService.postAuthLogin(email, password);
+		if (authService.postAuthLogin(email, password)) {
+			return ResponseEntity.status(HttpStatus.OK).body("login successfully");
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("login faild");
+		}
 	}
 
 	@GetMapping("/auth/join/exist")
-	public boolean getBoard(@RequestParam("email") String email) throws Exception {
-		return authService.getAuthJoinExist(email);
+	public ResponseEntity<Map<String, Object>> getBoard(@RequestParam("email") String email) throws Exception {
+		Map<String, Object> response = new HashMap<>();
+
+		if (authService.getAuthJoinExist(email)) {
+			response.put("isExist", true);
+		} else {
+			response.put("isExist", false);
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 }
