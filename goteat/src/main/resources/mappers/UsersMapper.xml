@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="javaeatsong.goteat.repository.UsersMapper">
-	<select id="selectByEmail" parameterType="String"
-		resultType="javaeatsong.goteat.model.Users">
+	<select id="selectByEmail" resultType="javaeatsong.goteat.model.Users">
 		SELECT * FROM users
-		WHERE email = #{value}
+		WHERE email = #{email}
 	</select>
-	<select id="selectByUid" parameterType="String"
-		resultType="javaeatsong.goteat.model.Users">
+	<select id="selectByUid" resultType="javaeatsong.goteat.model.Users">
 		SELECT * FROM users
 		WHERE id = #{uid}
 	</select>
-	<insert id="insert"
-		parameterType="javaeatsong.goteat.model.Users">
+	<insert id="insert">
 		INSERT INTO users(
 			name,
 			profile_name,
