@@ -14,9 +14,9 @@ public class BoardsService {
 	@Autowired
 	private BoardsMapper boardsMapper;
 
-	public List<HashMap<String, Object>> getBoard(String uid, String keyword, List<String> categories)
+	public List<HashMap<String, Object>> getBoard(String uid, String keyword, String category)
 			throws Exception {
-		return boardsMapper.selectList(uid, keyword, categories);
+		return boardsMapper.selectList(uid, keyword, category);
 	}
 
 }

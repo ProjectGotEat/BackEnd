@@ -18,11 +18,8 @@
 		JOIN board_categories bc ON b.category_id = bc.id
 		LEFT JOIN scraps s ON b.id = s.board_id AND s.user_id = #{uid}
 		WHERE b.item_name LIKE CONCAT('%', #{keyword}, '%')
-		<if test="categories != null and !categories.isEmpty()">
-      	AND b.category_id IN
-      	<foreach item="category" collection="categories" open="(" separator="," close=")">
-          	#{category}
-      	</foreach>
+		<if test="category != null and !category.isEmpty()">
+      		AND b.category_id = #{category}
    		</if>
 		ORDER BY b.id DESC;
 	</select>

@@ -11,7 +11,7 @@ import javaeatsong.goteat.model.Boards;
 @Mapper
 public interface BoardsMapper {
 	List<HashMap<String, Object>> selectList(@Param("uid") String uid, @Param("keyword") String keyword,
-			@Param("categories") List<String> categories) throws Exception;
+			@Param("category") String category) throws Exception;
 
 	Boards select(int id) throws Exception;
 

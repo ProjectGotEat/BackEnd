@@ -29,18 +29,18 @@ public class BoardsController {
 	public ResponseEntity<List<HashMap<String, Object>>> getBoard(@RequestHeader HttpHeaders header) throws Exception {
 		String uid = header.getFirst("uid");
 		String keyword = "";
-		List<String> categories = null;
+		String category = "";
 
 		if (uid == null || uid.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ArrayList<>());
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(boardsService.getBoard(uid, keyword, categories));
+		return ResponseEntity.status(HttpStatus.OK).body(boardsService.getBoard(uid, keyword, category));
 	}
 
 	@GetMapping("/board/search")
 	public ResponseEntity<List<HashMap<String, Object>>> getBoardByKeywordCategories(
-			@RequestParam("keyword") String keyword, @RequestParam("categories") List<String> categories,
+			@RequestParam("keyword") String keyword, @RequestParam("category") String category,
 			@RequestHeader HttpHeaders header) throws Exception {
 		String uid = header.getFirst("uid");
 
@@ -48,6 +48,6 @@ public class BoardsController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ArrayList<>());
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(boardsService.getBoard(uid, keyword, categories));
+		return ResponseEntity.status(HttpStatus.OK).body(boardsService.getBoard(uid, keyword, category));
 	}
 }
