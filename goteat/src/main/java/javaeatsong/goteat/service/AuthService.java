@@ -22,7 +22,7 @@ public class AuthService {
 	}
 
 	public boolean postAuthLogin(String email, String rawPassword) throws Exception {
-		Users users = usersMapper.select(email);
+		Users users = usersMapper.selectByEmail(email);
 		if (passwordEncoder.matches(rawPassword, users.getPassword())) {
 			return true;
 		} else {
@@ -31,7 +31,7 @@ public class AuthService {
 	}
 
 	public boolean getAuthJoinExist(String email) throws Exception {
-		Users users = usersMapper.select(email);
+		Users users = usersMapper.selectByEmail(email);
 		if (users != null) {
 			return true;
 		} else {

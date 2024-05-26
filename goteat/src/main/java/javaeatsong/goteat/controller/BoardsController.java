@@ -1,6 +1,5 @@
 package javaeatsong.goteat.controller;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@MapperScan(basePackages = "javaeatsong.goteat.repository") // 탐색할 패키지 설정
 public class BoardsController {
 
 	private final BoardsService boardsService;

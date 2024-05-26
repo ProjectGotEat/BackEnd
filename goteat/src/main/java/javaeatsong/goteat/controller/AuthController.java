@@ -1,6 +1,5 @@
 package javaeatsong.goteat.controller;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@MapperScan(basePackages = "javaeatsong.goteat.repository") // 탐색할 패키지 설정
 public class AuthController {
 
 	private final AuthService authService;
