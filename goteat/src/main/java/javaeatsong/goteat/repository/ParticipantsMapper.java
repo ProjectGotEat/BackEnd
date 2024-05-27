@@ -17,5 +17,7 @@ public interface ParticipantsMapper {
 	List<HashMap<String, Object>> selectListEndedByOrganizerUserId(@Param("uid") int uid) throws Exception;
 
 	Participants select(int id) throws Exception;
+	
+	int insert(Participants param) throws Exception;
 
 }

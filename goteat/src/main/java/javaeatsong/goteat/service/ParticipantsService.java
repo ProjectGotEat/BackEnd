@@ -16,9 +16,9 @@ public class ParticipantsService {
 	@Autowired
 	private ParticipantsMapper participantsMapper;
 	
-  // 소분 참여하기
-  public void postParticipant(Participants participant) throws Exception {
-        participantsMapper.insert(participant);
+	// 소분 참여하기
+	public int postParticipant(Participants participant) throws Exception {
+        return participantsMapper.insert(participant);
     }
 
 	// 내가 주최한 소분 전체 조회
