@@ -3,6 +3,7 @@ package javaeatsong.goteat.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import javaeatsong.goteat.model.Users;
 
@@ -10,7 +11,9 @@ import javaeatsong.goteat.model.Users;
 public interface UsersMapper {
 	List<Users> selectList() throws Exception;
 
-	Users select(int id) throws Exception;
+	Users selectByEmail(@Param("email") String email) throws Exception;
+
+	Users selectByUid(@Param("uid") String uid) throws Exception;
 
 	void insert(Users param) throws Exception;
 
