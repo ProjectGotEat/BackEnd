@@ -63,8 +63,8 @@ public class AuthController {
 	}
 
 	@GetMapping("/auth/join/exist")
-	public ResponseEntity<Map<String, Object>> getBoard(@RequestParam("email") String email) throws Exception {
-		Map<String, Object> response = new HashMap<>();
+	public ResponseEntity<HashMap<String, Object>> getAuthJoinExist(@RequestParam("email") String email) throws Exception {
+		HashMap<String, Object> response = new HashMap<>();
 
 		if (authService.getAuthJoinExist(email)) {
 			response.put("isExist", true);
