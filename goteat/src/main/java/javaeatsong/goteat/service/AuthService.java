@@ -1,5 +1,7 @@
 package javaeatsong.goteat.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,12 +23,15 @@ public class AuthService {
 		usersMapper.insert(users);
 	}
 
-	public boolean postAuthLogin(String email, String rawPassword) throws Exception {
+	public HashMap<String, Object> postAuthLogin(String email, String rawPassword) throws Exception {
 		Users users = usersMapper.selectByEmail(email);
+
 		if (passwordEncoder.matches(rawPassword, users.getPassword())) {
-			return true;
+			HashMap<String, Object> response = new HashMap<>();
+			response.put("uid", users.getId());
+			return response;
 		} else {
-			return false;
+			return null;
 		}
 	}
 

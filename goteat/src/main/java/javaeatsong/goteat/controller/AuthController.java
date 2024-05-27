@@ -28,7 +28,7 @@ public class AuthController {
 		if (requestBody.get("name") == null || requestBody.get("profile_name") == null
 				|| requestBody.get("image") == null || requestBody.get("email") == null
 				|| requestBody.get("password") == null || requestBody.get("noti_allow") == null) {
-			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("request faild");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("request faild");
 		}
 
 		Users user = new Users();
@@ -47,23 +47,28 @@ public class AuthController {
 	}
 
 	@PostMapping("/auth/log-in")
-	public ResponseEntity<String> postAuthLogin(@RequestBody Map<String, ?> requestBody) throws Exception {
+	public ResponseEntity<HashMap<String, Object>> postAuthLogin(@RequestBody Map<String, ?> requestBody)
+			throws Exception {
 		if (requestBody.get("email") == null || requestBody.get("password") == null) {
-			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("login faild");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<>());
 		}
 
 		String email = requestBody.get("email").toString();
 		String password = requestBody.get("password").toString();
 
-		if (authService.postAuthLogin(email, password)) {
-			return ResponseEntity.status(HttpStatus.OK).body("login successfully");
+		HashMap<String, Object> response = authService.postAuthLogin(email, password);
+		if (response != null) {
+			Integer uid = (Integer) response.get("uid");
+			response.put("uid", uid);
+			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("login faild");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HashMap<>());
 		}
 	}
 
 	@GetMapping("/auth/join/exist")
-	public ResponseEntity<HashMap<String, Object>> getAuthJoinExist(@RequestParam("email") String email) throws Exception {
+	public ResponseEntity<HashMap<String, Object>> getAuthJoinExist(@RequestParam("email") String email)
+			throws Exception {
 		HashMap<String, Object> response = new HashMap<>();
 
 		if (authService.getAuthJoinExist(email)) {
