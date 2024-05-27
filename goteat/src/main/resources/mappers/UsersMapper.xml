@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="javaeatsong.goteat.repository.UsersMapper">
+	<select id="selectByEmail" resultType="javaeatsong.goteat.model.Users">
+		SELECT * FROM users
+		WHERE email = #{email}
+	</select>
+	<select id="selectByUid" resultType="javaeatsong.goteat.model.Users">
+		SELECT * FROM users
+		WHERE id = #{uid}
+	</select>
+	<insert id="insert">
+		INSERT INTO users(
+			name,
+			profile_name,
+			image,
+			email,
+			password,
+			`rank`, <!-- rank가 MySQL의 예약어이므로, 앞뒤를 백틱으로 감싸줌 -->
+			point,
+			noti_allow)
+		VALUES(
+			#{name},
+			#{profileName},
+			#{image},
+			#{email},
+			#{password},
+			#{rank},
+			#{point},
+			#{notiAllow})
+	</insert>
+</mapper>
