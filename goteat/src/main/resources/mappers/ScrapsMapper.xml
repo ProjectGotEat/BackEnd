@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="javaeatsong.goteat.repository.ScrapsMapper">
+	<select id="selectList" parameterType="string" resultType="hashmap">
+        SELECT 
+            b.id AS id,
+            b.item_name AS itemName,
+            b.quantity AS quantity,
+            b.scale AS scale,
+            CAST(b.quantity / b.headcnt AS SIGNED INTEGER) AS each_quantity,
+        	CAST(b.total_price / b.headcnt AS SIGNED INTEGER) AS each_price,
+            b.meeting_location AS meetingLocation,
+            b.headcnt AS headcnt,
+            b.headcnt - b.remain_headcnt AS participantsHeadcnt,
+            c.content AS category,
+            b.is_finished AS isFinished,
+            1 AS isScraped
+        FROM
+            scraps s
+        JOIN
+            boards b ON s.board_id = b.id
+        JOIN
+            board_categories c ON b.category_id = c.id
+        WHERE
+            s.user_id = #{uid}
+    </select>
+
+	<insert id="insert"
+		parameterType="javaeatsong.goteat.model.Scraps">
+		INSERT INTO scraps(user_id, board_id)
+		VALUES(#{userId}, #{boardId})
+	</insert>
+</mapper>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javaeatsong.goteat.repository.BoardsMapper;
+import javaeatsong.goteat.model.Boards;
 
 @Service
 public class BoardsService {
@@ -19,4 +20,16 @@ public class BoardsService {
 		return boardsMapper.selectList(uid, keyword, category);
 	}
 
+	public HashMap<String, Object> getBoardDetail(String uid, int bid)
+			throws Exception {
+		return boardsMapper.selectDetail(uid, bid);
+	}
+
+    public void postBoard(Boards board) throws Exception {
+        boardsMapper.insert(board);
+    }
+    
+    public void decrementRemainHeadcnt(int bid) throws Exception {
+        boardsMapper.decrementRemainHeadcnt(bid);
+    }
 }

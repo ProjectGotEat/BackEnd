@@ -4,15 +4,24 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javaeatsong.goteat.service.BoardsService;
+import javaeatsong.goteat.model.Boards;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @RestController
 public class BoardsController {
@@ -47,5 +56,24 @@ public class BoardsController {
 		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(boardsService.getBoard(uid, keyword, category));
+	}
+	
+	@GetMapping("/board/{id}")
+	public HashMap<String, Object> getBoardDetail(@PathVariable("id") int bid,
+			@RequestHeader("uid") String uid) throws Exception {
+		return boardsService.getBoardDetail(uid, bid);
+	}
+	
+	@PostMapping("/board")
+	   public ResponseEntity<String> postBoard(@RequestBody Boards board, @RequestHeader("uid") String uid) throws Exception {
+			board.setUserId(Integer.valueOf(uid));
+			boardsService.postBoard(board);
+	       return ResponseEntity.status(HttpStatus.CREATED).body("Board created successfully");
+    }
+	
+	@PutMapping("/board/{id}/request")
+	public ResponseEntity<String> decrementReaminHeadcnt(@PathVariable("id") int bid) throws Exception {
+		boardsService.decrementRemainHeadcnt(bid);
+       return ResponseEntity.status(HttpStatus.CREATED).body("Remain Headcnt decremented successfully");
 	}
 }

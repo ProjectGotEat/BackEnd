@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="javaeatsong.goteat.repository.ReviewsMapper">
+	<select id="selectList" parameterType="string" resultType="hashmap">
+    SELECT
+      r.id AS id,
+      r.board_id as board_id, 
+      u.profile_name AS reviewer_nickname,
+      r.content AS content,
+      r.created_at AS created_at,
+      r.rate AS rate,
+      b.item_name AS item_name
+    FROM
+      reviews r
+      JOIN users u ON r.reviewer_id = u.id
+      JOIN boards b ON r.board_id = b.id
+    WHERE
+      r.reviewee_id = #{uid}
+  </select>
+</mapper>

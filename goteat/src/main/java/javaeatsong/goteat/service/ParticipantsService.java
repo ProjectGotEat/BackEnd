@@ -7,8 +7,8 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javaeatsong.goteat.model.Participants;
 import javaeatsong.goteat.repository.ParticipantsMapper;
+import javaeatsong.goteat.model.Participants;
 
 @Service
 public class ParticipantsService {
@@ -16,6 +16,11 @@ public class ParticipantsService {
 	@Autowired
 	private ParticipantsMapper participantsMapper;
 	
+  // 소분 참여하기
+  public void postParticipant(Participants participant) throws Exception {
+        participantsMapper.insert(participant);
+    }
+
 	// 내가 주최한 소분 전체 조회
 	public List<HashMap<String, Object>> getParticipantsOrganized(int uid) throws Exception {
 		List<HashMap<String, Object>> participantsList = participantsMapper.selectListByOrganizerId(uid);

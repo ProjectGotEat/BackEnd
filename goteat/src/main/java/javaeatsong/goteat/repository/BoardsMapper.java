@@ -13,8 +13,12 @@ public interface BoardsMapper {
 	List<HashMap<String, Object>> selectList(@Param("uid") String uid, @Param("keyword") String keyword,
 			@Param("category") String category) throws Exception;
 
+	HashMap<String, Object> selectDetail(@Param("uid") String uid, @Param("id") int bid) throws Exception;
+	
 	Boards select(int id) throws Exception;
 
+    void decrementRemainHeadcnt(int bid) throws Exception;
+	
 	void insert(Boards param) throws Exception;
 
 	void update(Boards param) throws Exception;
