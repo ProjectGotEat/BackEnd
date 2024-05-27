@@ -33,4 +33,10 @@ public class ParticipantsController {
 	public List<HashMap<String, Object>> getParticipantsParticipating(@RequestHeader("uid") int uid) throws Exception {
 		return participantsService.getParticipantsParticipating(uid);
 	}
+
+	// 종료된 소분 전체 조회
+	@GetMapping("/participant/end")
+	public List<HashMap<String, Object>> getParticipantsEnded(@RequestHeader("uid") int uid) throws Exception {
+		return participantsService.getParticipantsEnded(uid);
+	}
 }
