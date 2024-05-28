@@ -11,53 +11,47 @@
 	</insert>
   
     <select id="selectListByOrganizerId" resultType="Map">
-        SELECT item_name, quantity, headcnt, scale, meeting_time, participant_id, content
+        SELECT item_name, meeting_time, quantity, headcnt, scale, participant_id, content
         FROM
-            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
-                    m.participant_id, m.content,
-                   ROW_NUMBER() OVER(PARTITION BY m.participant_id ORDER BY m.created_at DESC) AS date_rank
-            FROM participants p
-            JOIN messages m
-                ON p.id = m.participant_id
-            JOIN boards b
-                ON p.board_id = b.id
-            WHERE p.organizer_id = #{uid}
-                AND (p.is_success = 0 and p.is_failed = 0) = false) organizer_boards
-        WHERE date_rank = 1
+            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale, p.id as participant_id, m.content, m.created_at
+             FROM participants p
+                      JOIN boards b
+                           ON b.id = p.board_id
+                      LEFT JOIN messages m
+                            ON m.participant_id = p.id
+             WHERE p.organizer_id = #{uid}
+               AND (p.is_success = 0 and p.is_failed = 0)) original_participant_message
+        GROUP BY participant_id
         ORDER BY participant_id DESC;
     </select>
 
     <select id="selectListByUserId" resultType="Map">
-        SELECT item_name, quantity, headcnt, scale, meeting_time, participant_id, content
+        SELECT item_name, meeting_time, quantity, headcnt, scale, participant_id, content
         FROM
-            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
-                    m.participant_id, m.content,
-                    ROW_NUMBER() OVER(PARTITION BY m.participant_id ORDER BY m.created_at DESC) AS date_rank
+            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale, p.id as participant_id, m.content, m.created_at
              FROM participants p
-                      JOIN messages m
-                           ON p.id = m.participant_id
                       JOIN boards b
-                           ON p.board_id = b.id
+                           ON b.id = p.board_id
+                      LEFT JOIN messages m
+                            ON m.participant_id = p.id
              WHERE p.user_id = #{uid}
-               AND (p.is_success = 0 AND p.is_failed = 0)) organizer_boards
-        WHERE date_rank = 1
+               AND (p.is_success = 0 and p.is_failed = 0)) original_participant_message
+        GROUP BY participant_id
         ORDER BY participant_id DESC;
     </select>
 
     <select id="selectListEndedByOrganizerUserId" resultType="Map">
-        SELECT item_name, quantity, headcnt, scale, meeting_time, participant_id, content
+        SELECT item_name, meeting_time, quantity, headcnt, scale, participant_id, content
         FROM
-            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
-                    m.participant_id, m.content,
-                    ROW_NUMBER() OVER(PARTITION BY m.participant_id ORDER BY m.created_at DESC) AS date_rank
+            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale, p.id as participant_id, m.content, m.created_at
              FROM participants p
-                 JOIN messages m
-                     ON p.id = m.participant_id
-                 JOIN boards b
-                     ON p.board_id = b.id
+                      JOIN boards b
+                           ON b.id = p.board_id
+                      LEFT JOIN messages m
+                            ON m.participant_id = p.id
              WHERE (p.organizer_id = #{uid} OR p.user_id = #{uid})
-               AND (p.is_success = 1 OR p.is_failed = 1)) participants_boards
-        WHERE date_rank = 1
+               AND (p.is_success = 1 OR p.is_failed = 1)) original_participant_message
+        GROUP BY participant_id
         ORDER BY participant_id DESC;
     </select>
 
