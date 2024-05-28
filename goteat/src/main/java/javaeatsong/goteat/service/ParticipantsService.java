@@ -101,4 +101,9 @@ public class ParticipantsService {
 
 		return data;
 	}
+
+	// 1:1 쪽지 상세 내역 조회
+	public List<HashMap<String, Object>> getParticipantMessages(int pid, int uid) throws Exception {
+		return participantsMapper.selectListMessages(pid, uid);
+	}
 }

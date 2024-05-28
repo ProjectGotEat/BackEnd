@@ -60,4 +60,11 @@
         WHERE date_rank = 1
         ORDER BY participant_id DESC;
     </select>
+
+    <select id="selectListMessages" resultType="Map">
+        SELECT
+        FROM participants p
+            JOIN messages m
+                ON m.
+    </select>
 </mapper>

@@ -24,4 +24,6 @@ public interface BoardsMapper {
 	void update(Boards param) throws Exception;
 
 	void delete(Boards param) throws Exception;
+
+	HashMap<String, Object> selectOverview(@Param("pid") int pid) throws Exception;
 }
