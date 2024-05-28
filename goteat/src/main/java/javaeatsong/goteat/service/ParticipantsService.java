@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javaeatsong.goteat.repository.ParticipantsMapper;
+import javaeatsong.goteat.repository.BoardsMapper;
 import javaeatsong.goteat.model.Participants;
 
 @Service
@@ -15,6 +16,9 @@ public class ParticipantsService {
 
 	@Autowired
 	private ParticipantsMapper participantsMapper;
+
+	@Autowired
+	private BoardsMapper boardsMapper;
 	
 	// 소분 참여하기
 	public int postParticipant(Participants participant) throws Exception {
@@ -103,7 +107,27 @@ public class ParticipantsService {
 	}
 
 	// 1:1 쪽지 상세 내역 조회
-	public List<HashMap<String, Object>> getParticipantMessages(int pid, int uid) throws Exception {
-		return participantsMapper.selectListMessages(pid, uid);
+	public HashMap<String, Object> getParticipantMessages(int pid, int uid) throws Exception {
+		HashMap<String, Object> boardOverview = boardsMapper.selectOverview(pid);
+
+		String title = new String();
+		String item_name = (String) boardOverview.get("item_name");
+		String scale = (String) boardOverview.get("scale");
+		int quantity = (int) boardOverview.get("quantity");
+		int headcnt = (int) boardOverview.get("headcnt");
+		int personal_quantity = quantity / headcnt;
+		title = item_name + " " + Integer.toString(personal_quantity) + scale;
+		boardOverview.put("title", title);
+		boardOverview.remove("item_name");
+		boardOverview.remove("scale");
+		boardOverview.remove("headcnt");
+		boardOverview.remove("quantity");
+
+		List<HashMap<String, Object>> messages = participantsMapper.selectListMessages(pid, uid);
+
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("boardOverview", boardOverview);
+		data.put("messages", messages);
+		return data;
 	}
 }

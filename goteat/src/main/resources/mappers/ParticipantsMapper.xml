@@ -62,9 +62,14 @@
     </select>
 
     <select id="selectListMessages" resultType="Map">
-        SELECT
+        SELECT u.profile_name, u.image, m.content, m.created_at
         FROM participants p
             JOIN messages m
-                ON m.
+                ON m.participant_id = p.id
+            JOIN users u
+                ON u.id = m.sender_id
+        WHERE p.id = #{pid}
+            AND (m.sender_id = #{uid} OR m.receiver_id = #{uid})
+        ORDER BY m.created_at;
     </select>
 </mapper>

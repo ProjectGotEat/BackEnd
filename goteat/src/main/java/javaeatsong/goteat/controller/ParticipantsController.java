@@ -58,4 +58,12 @@ public class ParticipantsController {
 	public List<HashMap<String, Object>> getParticipantsEnded(@RequestHeader("uid") int uid) throws Exception {
 		return participantsService.getParticipantsEnded(uid);
 	}
+
+	// 1:1 쪽지 상세 조회 구현
+	@GetMapping("/participant/{id}")
+	public HashMap<String, Object> getParticipantMessages(
+			@PathVariable("id") int id,
+			@RequestHeader("uid") int uid) throws Exception {
+		return participantsService.getParticipantMessages(id, uid);
+	}
 }
