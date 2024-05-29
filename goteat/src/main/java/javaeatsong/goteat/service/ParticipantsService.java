@@ -44,7 +44,7 @@ public class ParticipantsService {
 			Object title = participantsList.get(i).get("title");
 			Object meeting_time = participantsList.get(i).get("meeting_time");
 			Object content = participantsList.get(i).get("content");
-			Object id = particiapantList.get(i).get("participant_id");
+			Object id = participantsList.get(i).get("participant_id");
 
 			HashMap<String, Object> participant = new HashMap<String, Object>();
 			participant.put("id", id);
