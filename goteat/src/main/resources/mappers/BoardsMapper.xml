@@ -61,12 +61,15 @@
 		remain_headcnt , quantity , scale , total_price , meeting_location ,
 		meeting_time , is_up , item_image1 , item_image2 , receipt_image ,
 		latitude , longitude , is_reusable)
-		VALUES(#{userId}, #{categoryId}, #{itemName}, #{headcnt},
-		#{remainHeadcnt}, #{quantity}, #{scale}, #{totalPrice},
-		#{meetingLocation}, #{meetingTime}, #{isUp}, #{itemImage1},
-		#{itemImage2}, #{receiptImage}, #{latitude}, #{longitude},
-		#{isReusable})
+		SELECT #{userId}, c.id, #{itemName}, #{headcnt}, #{remainHeadcnt},
+           #{quantity}, #{scale}, #{totalPrice}, #{meetingLocation},
+           #{meetingTime}, #{isUp}, #{itemImage1}, #{itemImage2},
+           #{receiptImage}, #{latitude}, #{longitude}, #{isReusable}
+   		FROM board_categories c
+    	WHERE c.content = #{categoryId}
 	</insert>
+	
+	
 	
 	<update id="decrementRemainHeadcnt">
     UPDATE boards
