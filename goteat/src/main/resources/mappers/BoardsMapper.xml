@@ -22,7 +22,7 @@
 		<if test="category != null and !category.isEmpty()">
       		AND b.category_id = #{category}
    		</if>
-		ORDER BY b.id DESC;
+		ORDER BY is_up DESC, b.id DESC;
 	</select>
 	
 	<select id="selectDetail" resultType="Map">
