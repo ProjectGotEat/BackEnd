@@ -11,47 +11,62 @@
 	</insert>
   
     <select id="selectListByOrganizerId" resultType="Map">
-        SELECT item_name, meeting_time, quantity, headcnt, scale, participant_id, content
-        FROM
-            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale, p.id as participant_id, m.content, m.created_at
-             FROM participants p
-                      JOIN boards b
-                           ON b.id = p.board_id
-                      LEFT JOIN messages m
-                            ON m.participant_id = p.id
-             WHERE p.organizer_id = #{uid}
-               AND (p.is_success = 0 and p.is_failed = 0)) original_participant_message
-        GROUP BY participant_id
+        WITH rankedMessages AS (
+            SELECT
+                participant_id, content, created_at,
+                ROW_NUMBER() OVER (PARTITION BY participant_id ORDER BY created_at DESC) AS rn
+            FROM messages
+        )
+        SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
+               p.id as participant_id, rm.content
+        FROM participants p
+                 JOIN boards b
+                      ON p.board_id = b.id
+                 LEFT JOIN rankedMessages rm
+                           ON rm.participant_id = p.id
+                               AND rm.rn = 1
+        WHERE p.organizer_id = #{uid}
+            AND (p.is_success = 0 AND p.is_failed = 0)
         ORDER BY participant_id DESC;
     </select>
 
     <select id="selectListByUserId" resultType="Map">
-        SELECT item_name, meeting_time, quantity, headcnt, scale, participant_id, content
-        FROM
-            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale, p.id as participant_id, m.content, m.created_at
-             FROM participants p
-                      JOIN boards b
-                           ON b.id = p.board_id
-                      LEFT JOIN messages m
-                            ON m.participant_id = p.id
-             WHERE p.user_id = #{uid}
-               AND (p.is_success = 0 and p.is_failed = 0)) original_participant_message
-        GROUP BY participant_id
+        WITH rankedMessages AS (
+            SELECT
+                participant_id, content, created_at,
+                ROW_NUMBER() OVER (PARTITION BY participant_id ORDER BY created_at DESC) AS rn
+            FROM messages
+        )
+        SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
+               p.id as participant_id, rm.content
+        FROM participants p
+                 JOIN boards b
+                      ON p.board_id = b.id
+                 LEFT JOIN rankedMessages rm
+                           ON rm.participant_id = p.id
+                               AND rm.rn = 1
+        WHERE p.user_id = #{uid}
+            AND (p.is_success = 0 and p.is_failed = 0)
         ORDER BY participant_id DESC;
     </select>
 
     <select id="selectListEndedByOrganizerUserId" resultType="Map">
-        SELECT item_name, meeting_time, quantity, headcnt, scale, participant_id, content
-        FROM
-            (SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale, p.id as participant_id, m.content, m.created_at
-             FROM participants p
-                      JOIN boards b
-                           ON b.id = p.board_id
-                      LEFT JOIN messages m
-                            ON m.participant_id = p.id
-             WHERE (p.organizer_id = #{uid} OR p.user_id = #{uid})
-               AND (p.is_success = 1 OR p.is_failed = 1)) original_participant_message
-        GROUP BY participant_id
+        WITH rankedMessages AS (
+            SELECT
+                participant_id, content, created_at,
+                ROW_NUMBER() OVER (PARTITION BY participant_id ORDER BY created_at DESC) AS rn
+            FROM messages
+        )
+        SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
+               p.id as participant_id, rm.content
+        FROM participants p
+                 JOIN boards b
+                      ON p.board_id = b.id
+                 LEFT JOIN rankedMessages rm
+                           ON rm.participant_id = p.id
+                               AND rm.rn = 1
+        WHERE (p.organizer_id = #{uid} OR p.user_id = #{uid})
+            AND (p.is_success = 1 OR p.is_failed = 1)
         ORDER BY participant_id DESC;
     </select>
 
