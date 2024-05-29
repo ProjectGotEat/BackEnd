@@ -89,7 +89,7 @@ public class ParticipantsController {
 			@RequestHeader("uid") int uid,
 			@RequestParam("content") String content,
 			@RequestParam("receiverId") int receiverId) throws Exception {
-		participantsService.postMessage(pid, uid, receiverId, content);
+		participantsService.postParticipantMessage(id, uid, receiverId, content);
 		return ResponseEntity.status(HttpStatus.CREATED).body("message sent");
 	}
 }
