@@ -75,7 +75,7 @@
 	</update>
 
 	<select id="selectOverview" resultType="Map">
-		SELECT b.item_name, b.quantity, b.headcnt, b.scale, b.meeting_location, b.meeting_time
+		SELECT b.item_name, b.quantity, b.headcnt, b.scale, b.meeting_location, b.meeting_time, p.id as participant_id
 		FROM boards b
 		JOIN participants p
 			ON p.board_id = b.id
