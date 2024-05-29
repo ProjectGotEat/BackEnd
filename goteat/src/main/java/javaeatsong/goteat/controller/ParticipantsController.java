@@ -87,8 +87,8 @@ public class ParticipantsController {
 	public ResponseEntity<String> postParticipantMessage (
 			@PathVariable("id") int id,
 			@RequestHeader("uid") int uid,
-			@RequestBody("content") String content,
-			@RequestBOdy("receiverId") int receiverId) throws Exception {
+			@RequestParam("content") String content,
+			@RequestParam("receiverId") int receiverId) throws Exception {
 		participantsService.postMessage(pid, uid, receiverId, content);
 		return ResponseEntity.status(HttpStatus.CREATED).body("message sent");
 	}
