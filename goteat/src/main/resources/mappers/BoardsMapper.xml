@@ -69,7 +69,11 @@
     	WHERE c.content = #{categoryId}
 	</insert>
 	
-	
+	<insert id="insertPointHistory" parameterType="javaeatsong.goteat.model.Boards">
+    	INSERT INTO point_histories (user_id, change_point, change_reason)
+    	VALUES (#{userId}, -30, '게시글 상단 고정(-30)')
+	</insert>
+
 	
 	<update id="decrementRemainHeadcnt">
     UPDATE boards

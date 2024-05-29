@@ -21,6 +21,8 @@ public interface BoardsMapper {
 	
 	void insert(Boards param) throws Exception;
 
+	void insertPointHistory(int userId);
+	
 	void update(Boards param) throws Exception;
 
 	void delete(Boards param) throws Exception;
