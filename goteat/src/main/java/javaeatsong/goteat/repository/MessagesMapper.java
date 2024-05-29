@@ -12,7 +12,10 @@ public interface MessagesMapper {
 
 	Messages select(int id) throws Exception;
 
-	void insert(Messages param) throws Exception;
+	void insert(@Param("pid") int pid,
+				@Param("uid") int uid,
+				@Param("receiverId") int receiverId,
+				@Param("content") String content) throws Exception;
 
 	void update(Messages param) throws Exception;
 

@@ -76,10 +76,20 @@ public class ParticipantsController {
 
 	// 1:1 쪽지 상세 조회 구현
 	@GetMapping("/participant/{id}")
-	public HashMap<String, Object> getParticipantMessages(
+	public ResponseEntity<HashMap<String, Object>> getParticipantMessages(
 			@PathVariable("id") int id,
 			@RequestHeader("uid") int uid) throws Exception {
-		return participantsService.getParticipantMessages(id, uid);
+		return ResponseEntity.status(HttpStatus.OK).body(participantsService.getParticipantMessages(id, uid));
 	}
 
+	// 쪽지 보내기
+	@PostMapping("/participant/{id}")
+	public ResponseEntity<String> postParticipantMessage (
+			@PathVariable("id") int id,
+			@RequestHeader("uid") int uid,
+			@RequestBody("content") String content,
+			@RequestBOdy("receiverId") int receiverId) throws Exception {
+		participantsService.postMessage(pid, uid, receiverId, content);
+		return ResponseEntity.status(HttpStatus.CREATED).body("message sent");
+	}
 }

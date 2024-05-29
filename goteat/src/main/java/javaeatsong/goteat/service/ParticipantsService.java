@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javaeatsong.goteat.repository.ParticipantsMapper;
 import javaeatsong.goteat.repository.BoardsMapper;
+import javaeatsong.goteat.repository.MessagesMapper;
 import javaeatsong.goteat.model.Participants;
 
 @Service
@@ -19,6 +20,9 @@ public class ParticipantsService {
 
 	@Autowired
 	private BoardsMapper boardsMapper;
+
+	@Autowired
+	private MessagesMapper messagesMapper;
 	
 	// 소분 참여하기
 	public int postParticipant(Participants participant) throws Exception {
@@ -129,5 +133,10 @@ public class ParticipantsService {
 		data.put("boardOverview", boardOverview);
 		data.put("messages", messages);
 		return data;
+	}
+
+	// 쪽지 보내기
+	public int postParticipantMessage(int pid, int uid, int receiverId, String content) throws Exception {
+		return messagesMapper.insert(pid, uid, receiverId, content);
 	}
 }
