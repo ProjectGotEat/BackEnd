@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javaeatsong.goteat.service.ReviewsService;
+import javaeatsong.goteat.model.Boards;
 import javaeatsong.goteat.model.Reviews;
 
 import java.util.HashMap;
@@ -33,4 +34,14 @@ public class ReviewsController {
 	public List<HashMap<String, Object>> getReview(@RequestHeader HttpHeaders header) throws Exception {
 		return reviewsService.getReview(header.getFirst("uid"));
 	}
+	
+	
+	@PostMapping("/participant/{id}/review")
+	   public ResponseEntity<String> postReview(@RequestBody Reviews review, @RequestHeader("uid") int uid, @PathVariable("id") int pid)
+			   throws Exception {
+		review.setReviewerId(uid); //리뷰하는 사람 ID 세팅
+		reviewsService.postReview(review);
+		reviewsService.insertPointHistory(uid);
+	    return ResponseEntity.status(HttpStatus.CREATED).body("Review created successfully");
+    }
 }
