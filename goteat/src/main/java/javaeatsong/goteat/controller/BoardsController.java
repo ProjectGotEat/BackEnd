@@ -22,7 +22,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @RestController
 public class BoardsController {
 
@@ -65,9 +64,12 @@ public class BoardsController {
 	}
 	
 	@PostMapping("/board")
-	   public ResponseEntity<String> postBoard(@RequestBody Boards board, @RequestHeader("uid") String uid) throws Exception {
-			board.setUserId(Integer.valueOf(uid));
+	   public ResponseEntity<String> postBoard(@RequestBody Boards board, @RequestHeader("uid") int uid) throws Exception {
+			board.setUserId(uid);
 			boardsService.postBoard(board);
+			if(board.getIsUp()==1){
+				boardsService.insertPointHistory(uid);
+			}
 	       return ResponseEntity.status(HttpStatus.CREATED).body("Board created successfully");
     }
 	

@@ -15,6 +15,8 @@ public interface ReviewsMapper {
 	Reviews select(int id) throws Exception;
 
 	void insert(Reviews param) throws Exception;
+	
+	void insertPointHistory(int userId);
 
 	void update(Reviews param) throws Exception;
 

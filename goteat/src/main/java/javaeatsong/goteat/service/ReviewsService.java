@@ -18,4 +18,12 @@ public class ReviewsService {
 	public List<HashMap<String, Object>> getReview(String uid) throws Exception {
 		return reviewsMapper.selectList(uid);
 	}
+    
+	public void postReview(Reviews review) throws Exception {
+        reviewsMapper.insert(review);
+    }
+	
+    public void insertPointHistory(int userId) {
+        reviewsMapper.insertPointHistory(userId);
+    }
 }

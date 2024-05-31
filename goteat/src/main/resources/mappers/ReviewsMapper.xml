@@ -16,5 +16,18 @@
       JOIN boards b ON r.board_id = b.id
     WHERE
       r.reviewee_id = #{uid}
-  </select>
+  	</select>
+
+	<insert id="insert"
+		parameterType="javaeatsong.goteat.model.Reviews">
+		INSERT INTO reviews(board_id, reviewer_id, reviewee_id, rate, content)
+		VALUES (#{boardId}, #{reviewerId}, #{revieweeId}, #{rate}, #{content})
+	</insert>
+	
+	<insert id="insertPointHistory" parameterType="javaeatsong.goteat.model.Reviews">
+    	INSERT INTO point_histories (user_id, change_point, change_reason)
+    	VALUES (#{userId}, 10, '리뷰 작성 (+10)')
+	</insert>
+  
+  
 </mapper>
