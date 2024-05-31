@@ -71,7 +71,7 @@
     </select>
 
     <select id="selectListMessages" resultType="Map">
-        SELECT u.profile_name, u.image, m.content, m.created_at
+        SELECT u.profile_name, u.image, m.sender_id, m.receiver_id, m.content, m.created_at
         FROM participants p
             JOIN messages m
                 ON m.participant_id = p.id
