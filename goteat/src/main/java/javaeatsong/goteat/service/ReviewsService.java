@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javaeatsong.goteat.repository.ReviewsMapper;
-import javaeatsong.goteat.model.Boards;
 import javaeatsong.goteat.model.Reviews;
 
 @Service
