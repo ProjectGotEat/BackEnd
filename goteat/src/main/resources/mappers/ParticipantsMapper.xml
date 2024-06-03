@@ -81,4 +81,24 @@
             AND (m.sender_id = #{uid} OR m.receiver_id = #{uid})
         ORDER BY m.created_at;
     </select>
+
+    <update id="updateIsSuccess">
+        UPDATE participants
+        SET is_success = 1
+        WHERE id = #{id}
+            AND (user_id = #{uid} OR organizer_id = #{uid});
+    </update>
+
+    <update id="updateIsFinished">
+        UPDATE boards b
+        SET b.is_finished = 1
+        WHERE b.id = (SELECT p.board_id
+                      FROM participants p
+                      WHERE p.id = #{pid})
+          AND (SELECT COUNT(*)
+               FROM participants p
+               WHERE p.board_id = b.id
+                 AND p.is_success = 1
+              ) >= b.headcnt;
+    </update>
 </mapper>

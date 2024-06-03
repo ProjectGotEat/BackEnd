@@ -145,4 +145,14 @@ public class ParticipantsService {
 	public int postParticipantMessage(int pid, int uid, int receiverId, String content) throws Exception {
 		return messagesMapper.insert(pid, uid, receiverId, content);
 	}
+
+	// 소분 성공 처리
+	public int putParticipantSuccess(int pid, int uid) throws Exception {
+		if (participantsMapper.updateIsSuccess (pid, uid) == 1) {
+			participantsMapper.updateIsFinished (pid);
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 }

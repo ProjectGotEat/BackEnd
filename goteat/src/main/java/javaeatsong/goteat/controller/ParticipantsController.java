@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -92,5 +93,17 @@ public class ParticipantsController {
 		String content = (String) message.get("content");
 		participantsService.postParticipantMessage(id, uid, receiverId, content);
 		return ResponseEntity.status(HttpStatus.CREATED).body("message sent");
+	}
+
+	// 소분 성공 요청
+	@PutMapping("/participant/{id}/success")
+	public ResponseEntity<String> putParticipantSuccess (
+			@PathVariable("id") int id,
+			@RequestHeader("uid") int uid) throws Exception {
+		if (participantsService.putParticipantSuccess(id, uid) == 1) {
+			return ResponseEntity.status(HttpStatus.OK).body("participant got succeed");
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no matching participant");
+		}
 	}
 }

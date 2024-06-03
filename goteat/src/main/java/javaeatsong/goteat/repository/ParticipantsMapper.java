@@ -22,4 +22,8 @@ public interface ParticipantsMapper {
 	
 	int insert(Participants param) throws Exception;
 
+	int updateIsSuccess(int id, int uid) throws Exception;
+
+	int updateIsFinished(int pid) throws Exception;
+
 }
