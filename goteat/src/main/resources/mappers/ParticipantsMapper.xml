@@ -101,4 +101,11 @@
                  AND p.is_success = 1
               ) >= b.headcnt;
     </update>
+
+    <update id="updateIsFailed">
+        UPDATE participants
+        SET is_failed = 1
+        WHERE id = #{id}
+            AND (organizer_id = #{uid} OR user_id = #{uid});
+    </update>
 </mapper>

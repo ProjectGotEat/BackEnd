@@ -26,4 +26,6 @@ public interface ParticipantsMapper {
 
 	int updateIsFinished(int pid) throws Exception;
 
+	int updateIsFailed(int id, int uid) throws Exception;
+
 }

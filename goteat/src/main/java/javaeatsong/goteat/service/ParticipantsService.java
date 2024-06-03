@@ -155,4 +155,13 @@ public class ParticipantsService {
 			return 0;
 		}
 	}
+
+	// 소분 실패 처리
+	public int putParticipantFail(int pid, int uid) throws Exception {
+		if (participantsMapper.updateIsFailed (pid, uid) == 1) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 }

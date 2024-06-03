@@ -101,9 +101,21 @@ public class ParticipantsController {
 			@PathVariable("id") int id,
 			@RequestHeader("uid") int uid) throws Exception {
 		if (participantsService.putParticipantSuccess(id, uid) == 1) {
-			return ResponseEntity.status(HttpStatus.OK).body("participant got succeed");
+			return ResponseEntity.status(HttpStatus.OK).body("participant got successfully succeed");
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no matching participant");
 		}
 	}
+
+	// 소분 실패 요청
+	@PutMapping("participant/{id}/fail")
+		public ResponseEntity<String> putParticipantFail (
+				@PathVariable("id") int id,
+				@RequestHeader("uid") int uid) throws Exception {
+			if (participantsService.putParticipantFail(id, uid) == 1) {
+				return ResponseEntity.status(HttpStatus.OK).body("participant got successfully failed");
+			} else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no matching participant");
+			}
+		}
 }
