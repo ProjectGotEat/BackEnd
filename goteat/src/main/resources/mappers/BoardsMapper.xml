@@ -13,7 +13,8 @@
         		b.headcnt - b.remain_headcnt AS participants_headcnt,
         		bc.content AS category,
         		b.is_finished,
-        		IF(s.board_id IS NOT NULL, 1, 0) AS is_scraped
+        		IF(s.board_id IS NOT NULL, 1, 0) AS is_scraped,
+        		b.item_image1
 		FROM boards b
 		JOIN board_categories bc ON b.category_id = bc.id
 		LEFT JOIN scraps s ON b.id = s.board_id AND s.user_id = #{uid}
@@ -21,7 +22,7 @@
 		<if test="category != null and !category.isEmpty()">
       		AND b.category_id = #{category}
    		</if>
-		ORDER BY b.id DESC;
+		ORDER BY is_up DESC, b.id DESC;
 	</select>
 	
 	<select id="selectDetail" resultType="Map">

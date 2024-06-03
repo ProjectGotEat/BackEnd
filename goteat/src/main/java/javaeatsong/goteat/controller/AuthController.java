@@ -26,8 +26,8 @@ public class AuthController {
 	@PostMapping("/auth/join")
 	public ResponseEntity<String> postAuthJoin(@RequestBody Map<String, ?> requestBody) throws Exception {
 		if (requestBody.get("name") == null || requestBody.get("profile_name") == null
-				|| requestBody.get("image") == null || requestBody.get("email") == null
-				|| requestBody.get("password") == null || requestBody.get("noti_allow") == null) {
+				|| requestBody.get("email") == null || requestBody.get("password") == null
+				|| requestBody.get("noti_allow") == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("request faild");
 		}
 
