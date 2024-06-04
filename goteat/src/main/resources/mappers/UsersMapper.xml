@@ -22,7 +22,7 @@
 		VALUES(
 			#{name},
 			#{profileName},
-			#{image},
+			"",
 			#{email},
 			#{password},
 			#{rank},

@@ -34,7 +34,6 @@ public class AuthController {
 		Users user = new Users();
 		user.setName(requestBody.get("name").toString());
 		user.setProfileName(requestBody.get("profile_name").toString());
-		user.setImage(requestBody.get("image").toString());
 		user.setEmail(requestBody.get("email").toString());
 		user.setPassword(requestBody.get("password").toString());
 		user.setRank("씨앗");
