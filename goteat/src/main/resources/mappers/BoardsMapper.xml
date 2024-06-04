@@ -81,4 +81,12 @@
     SET remain_headcnt = remain_headcnt - 1
     WHERE id = #{bid} AND remain_headcnt > 0
 	</update>
+
+	<select id="selectOverview" resultType="Map">
+		SELECT b.item_name, b.quantity, b.headcnt, b.scale, b.meeting_location, b.meeting_time, p.id as participant_id
+		FROM boards b
+		JOIN participants p
+			ON p.board_id = b.id
+		WHERE p.id = #{pid};
+	</select>
 </mapper>
