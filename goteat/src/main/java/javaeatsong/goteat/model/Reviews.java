@@ -15,7 +15,7 @@ import lombok.Setter;
 @Builder
 public class Reviews {
 	private Integer id;
-	private Integer boardId;
+	private Integer participantId;
 	private Integer reviewerId;
 	private Integer revieweeId;
 	private Integer rate;
@@ -30,12 +30,12 @@ public class Reviews {
 		this.id = id;
 	}
 
-	public Integer getBoardId() {
-		return boardId;
+	public Integer getParticipantId() {
+		return participantId;
 	}
 
-	public void setBoardId(Integer boardId) {
-		this.boardId = boardId;
+	public void setParticipantId(Integer participantId) {
+		this.participantId = participantId;
 	}
 
 	public Integer getReviewerId() {
@@ -80,7 +80,7 @@ public class Reviews {
 
 	@Override
 	public String toString() {
-		return "ReviewsDTO [id=" + id + ", boardId=" + boardId + ", reviewerId=" + reviewerId + ", revieweeId="
+		return "ReviewsDTO [id=" + id + ", participantId=" + participantId + ", reviewerId=" + reviewerId + ", revieweeId="
 				+ revieweeId + ", rate=" + rate + ", content=" + content + ", createdAt=" + createdAt + "]";
 	}
 }

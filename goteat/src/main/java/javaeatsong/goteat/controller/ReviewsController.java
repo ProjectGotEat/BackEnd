@@ -39,6 +39,7 @@ public class ReviewsController {
 	   public ResponseEntity<String> postReview(@RequestBody Reviews review, @RequestHeader("uid") int uid, @PathVariable("id") int pid)
 			   throws Exception {
 		review.setReviewerId(uid); //리뷰하는 사람 ID 세팅
+		review.setParticipantId(pid);
 		reviewsService.postReview(review);
 		reviewsService.insertPointHistory(uid);
 	    return ResponseEntity.status(HttpStatus.CREATED).body("Review created successfully");

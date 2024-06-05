@@ -3,25 +3,26 @@
 <mapper namespace="javaeatsong.goteat.repository.ReviewsMapper">
 	<select id="selectList" parameterType="string" resultType="hashmap">
     SELECT
-      r.id AS id,
-      r.board_id as board_id, 
-      u.profile_name AS reviewer_nickname,
-      r.content AS content,
-      r.created_at AS created_at,
-      r.rate AS rate,
-      b.item_name AS item_name
+        r.id AS id,
+        r.participant_id AS participant_id, 
+        u.profile_name AS reviewer_nickname,
+        r.content AS content,
+        r.created_at AS created_at,
+        r.rate AS rate,
+        b.item_name AS item_name
     FROM
-      reviews r
-      JOIN users u ON r.reviewer_id = u.id
-      JOIN boards b ON r.board_id = b.id
+        reviews r
+        JOIN users u ON r.reviewer_id = u.id
+        JOIN participants p ON r.participant_id = p.id
+        JOIN boards b ON p.board_id = b.id
     WHERE
-      r.reviewee_id = #{uid}
-  	</select>
-
+        r.reviewee_id = #{uid}  	
+    </select>
+    
 	<insert id="insert"
 		parameterType="javaeatsong.goteat.model.Reviews">
-		INSERT INTO reviews(board_id, reviewer_id, reviewee_id, rate, content)
-		VALUES (#{boardId}, #{reviewerId}, #{revieweeId}, #{rate}, #{content})
+		INSERT INTO reviews(participant_id, reviewer_id, reviewee_id, rate, content)
+		VALUES (#{participantId}, #{reviewerId}, #{revieweeId}, #{rate}, #{content})
 	</insert>
 	
 	<insert id="insertPointHistory" parameterType="javaeatsong.goteat.model.Reviews">
