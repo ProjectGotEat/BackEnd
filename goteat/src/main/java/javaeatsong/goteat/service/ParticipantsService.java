@@ -45,12 +45,16 @@ public class ParticipantsService {
 			Object meeting_time = participantsList.get(i).get("meeting_time");
 			Object content = participantsList.get(i).get("content");
 			Object id = participantsList.get(i).get("participant_id");
+			Object organizer_id = participantsList.get(i).get("organizer_id");
+			Object user_id = participantsList.get(i).get("user_id");
 
 			HashMap<String, Object> participant = new HashMap<String, Object>();
 			participant.put("id", id);
 			participant.put("title", title);
 			participant.put("meeting_time", meeting_time);
 			participant.put("message", content);
+			participant.put("organizer_id", organizer_id);
+			participant.put("user_id", user_id);
 
 			data.add(participant);
 		};
@@ -74,12 +78,16 @@ public class ParticipantsService {
 			Object meeting_time = participantsList.get(i).get("meeting_time");
 			Object content = participantsList.get(i).get("content");
 			Object id = participantsList.get(i).get("participant_id");
+			Object organizer_id = participantsList.get(i).get("organizer_id");
+			Object user_id = participantsList.get(i).get("user_id");
 
 			HashMap<String, Object> participant = new HashMap<String, Object>();
 			participant.put("id", id);
 			participant.put("title", title);
 			participant.put("meeting_time", meeting_time);
 			participant.put("message", content);
+			participant.put("organizer_id", organizer_id);
+			participant.put("user_id", user_id);
 
 			data.add(participant);
 		};
@@ -103,12 +111,16 @@ public class ParticipantsService {
 			Object meeting_time = participantsList.get(i).get("meeting_time");
 			Object content = participantsList.get(i).get("content");
 			Object id = participantsList.get(i).get("participant_id");
+			Object organizer_id = participantsList.get(i).get("organizer_id");
+			Object user_id = participantsList.get(i).get("user_id");
 
 			HashMap<String, Object> participant = new HashMap<String, Object>();
 			participant.put("id", id);
 			participant.put("title", title);
 			participant.put("meeting_time", meeting_time);
 			participant.put("message", content);
+			participant.put("organizer_id", organizer_id);
+			participant.put("user_id", user_id);
 
 			data.add(participant);
 		};
