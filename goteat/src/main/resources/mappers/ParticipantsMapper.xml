@@ -18,7 +18,7 @@
             FROM messages
         )
         SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
-               p.id as participant_id, rm.content
+               p.id as participant_id, p.organizer_id, p.user_id, rm.content
         FROM participants p
                  JOIN boards b
                       ON p.board_id = b.id
@@ -38,7 +38,7 @@
             FROM messages
         )
         SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
-               p.id as participant_id, rm.content
+               p.id as participant_id, p.organizer_id, p.user_id, rm.content
         FROM participants p
                  JOIN boards b
                       ON p.board_id = b.id
@@ -58,7 +58,7 @@
             FROM messages
         )
         SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
-               p.id as participant_id, rm.content
+               p.id as participant_id, p.organizer_id, p.user_id, rm.content
         FROM participants p
                  JOIN boards b
                       ON p.board_id = b.id
