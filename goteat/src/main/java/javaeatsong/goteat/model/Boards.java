@@ -3,6 +3,8 @@ package javaeatsong.goteat.model;
 import lombok.*;
 import java.sql.Timestamp;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -11,22 +13,34 @@ import java.util.Date;
 @Builder
 public class Boards {
 	private Integer id;
+    @JsonProperty("user_id")
 	private Integer userId;
+    @JsonProperty("category")
 	private String categoryId;
+    @JsonProperty("item_name")
 	private String itemName;
 	private Integer headcnt;
+    @JsonProperty("remain_headcnt")
 	private Integer remainHeadcnt;
 	private Integer quantity;
 	private String scale;
+    @JsonProperty("total_price")
 	private Integer totalPrice;
+    @JsonProperty("meeting_location")
 	private String meetingLocation;
+    @JsonProperty("meeting_time")
 	private Date meetingTime;
+    @JsonProperty("is_up")
 	private Boolean isUp;
+    @JsonProperty("item_image1")
 	private String itemImage1;
+    @JsonProperty("item_image2")
 	private String itemImage2;
+    @JsonProperty("receipt_image")
 	private String receiptImage;
 	private double latitude;
 	private double longitude;
+    @JsonProperty("is_reusable")
 	private Boolean isReusable;
 	private Boolean isFinished;
 	private Timestamp createdAt;

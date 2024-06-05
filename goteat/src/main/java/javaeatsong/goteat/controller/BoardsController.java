@@ -65,6 +65,9 @@ public class BoardsController {
 	
 	@PostMapping("/board")
 	   public ResponseEntity<String> postBoard(@RequestBody Boards board, @RequestHeader("uid") int uid) throws Exception {
+	    	Logger logger = LoggerFactory.getLogger(BoardsController.class);
+	    	logger.info("Received board data: {}", board);
+
 			board.setUserId(uid);
 			boardsService.postBoard(board);
 			if(board.getIsUp()==true){
