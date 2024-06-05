@@ -67,7 +67,7 @@ public class BoardsController {
 	   public ResponseEntity<String> postBoard(@RequestBody Boards board, @RequestHeader("uid") int uid) throws Exception {
 			board.setUserId(uid);
 			boardsService.postBoard(board);
-			if(board.getIsUp()==1){
+			if(board.getIsUp()==true){
 				boardsService.insertPointHistory(uid);
 			}
 	       return ResponseEntity.status(HttpStatus.CREATED).body("Board created successfully");

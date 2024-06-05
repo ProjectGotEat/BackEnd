@@ -21,14 +21,14 @@ public class Boards {
 	private Integer totalPrice;
 	private String meetingLocation;
 	private Date meetingTime;
-	private Integer isUp;
+	private Boolean isUp;
 	private String itemImage1;
 	private String itemImage2;
 	private String receiptImage;
 	private double latitude;
 	private double longitude;
-	private Integer isReusable;
-	private Integer isFinished;
+	private Boolean isReusable;
+	private Boolean isFinished;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 
@@ -120,11 +120,11 @@ public class Boards {
 		this.meetingTime = meetingTime;
 	}
 
-	public Integer getIsUp() {
+	public Boolean getIsUp() {
 		return isUp;
 	}
 
-	public void setIsUp(Integer isUp) {
+	public void setIsUp(Boolean isUp) {
 		this.isUp = isUp;
 	}
 
@@ -168,19 +168,19 @@ public class Boards {
 		this.longitude = longitude;
 	}
 
-	public Integer getIsReusable() {
+	public Boolean getIsReusable() {
 		return isReusable;
 	}
 
-	public void setIsReusable(Integer isReusable) {
+	public void setIsReusable(Boolean isReusable) {
 		this.isReusable = isReusable;
 	}
 
-	public Integer getIsFinished() {
+	public Boolean getIsFinished() {
 		return isFinished;
 	}
 
-	public void setIsFinished(Integer isFinished) {
+	public void setIsFinished(Boolean isFinished) {
 		this.isFinished = isFinished;
 	}
 
