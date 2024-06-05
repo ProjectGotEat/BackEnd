@@ -14,7 +14,8 @@
             b.headcnt - b.remain_headcnt AS participantsHeadcnt,
             c.content AS category,
             b.is_finished AS isFinished,
-            1 AS isScraped
+            1 AS isScraped,
+            b.item_image1
         FROM
             scraps s
         JOIN
