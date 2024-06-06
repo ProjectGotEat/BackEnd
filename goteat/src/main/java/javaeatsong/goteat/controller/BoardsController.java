@@ -98,7 +98,7 @@ public class BoardsController {
             try {
                 Path path = Paths.get(uploadDir + File.separator + itemImage1.getOriginalFilename());
                 Files.write(path, itemImage1.getBytes());
-                String fileUrl = "http://localhost:8080/uploads/" + itemImage1.getOriginalFilename();
+                String fileUrl = "http://goteat-goteat-98eb531b.koyeb.app/uploads/" + itemImage1.getOriginalFilename();
                 board.setItemImage1(fileUrl);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -110,7 +110,7 @@ public class BoardsController {
             try {
                 Path path = Paths.get(uploadDir + File.separator + itemImage2.getOriginalFilename());
                 Files.write(path, itemImage2.getBytes());
-                String fileUrl = "http://localhost:8080/uploads/" + itemImage2.getOriginalFilename();
+                String fileUrl = "http://goteat-goteat-98eb531b.koyeb.app/uploads/" + itemImage2.getOriginalFilename();
                 board.setReceiptImage(fileUrl); // Assuming you have this field in your Boards model
             } catch (IOException e) {
                 e.printStackTrace();
