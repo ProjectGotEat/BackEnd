@@ -98,7 +98,7 @@ public class BoardsController {
             try {
                 Path path = Paths.get(uploadDir + File.separator + itemImage1.getOriginalFilename());
                 Files.write(path, itemImage1.getBytes());
-                String fileUrl = "http://goteat-goteat-98eb531b.koyeb.app/uploads/" + itemImage1.getOriginalFilename();
+                String fileUrl = "http://goteat-project-goteat-fbd23032.koyeb.app/uploads/" + itemImage1.getOriginalFilename();
                 board.setItemImage1(fileUrl);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -110,8 +110,8 @@ public class BoardsController {
             try {
                 Path path = Paths.get(uploadDir + File.separator + itemImage2.getOriginalFilename());
                 Files.write(path, itemImage2.getBytes());
-                String fileUrl = "http://goteat-goteat-98eb531b.koyeb.app/uploads/" + itemImage2.getOriginalFilename();
-                board.setReceiptImage(fileUrl); // Assuming you have this field in your Boards model
+                String fileUrl = "http://goteat-project-goteat-fbd23032.koyeb.app/uploads/" + itemImage2.getOriginalFilename();
+                board.setReceiptImage(fileUrl);
             } catch (IOException e) {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload item_image2");

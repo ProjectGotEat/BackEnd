@@ -29,11 +29,11 @@ public class FileUploadController {
             // 저장 경로를 설정합니다.
             Path path = Paths.get(uploadDir + File.separator + file.getOriginalFilename());
             Files.write(path, file.getBytes());
+            String fileUrl = "http://goteat-project-goteat-fbd23032.koyeb.app/uploads/" + file.getOriginalFilename();
+            return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully: " + fileUrl);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
         }
-
-        return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully");
     }
 }
