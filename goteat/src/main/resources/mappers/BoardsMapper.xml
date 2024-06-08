@@ -31,6 +31,7 @@
             b.item_image2,
             b.receipt_image,
             b.created_at,
+            b.user_id AS organizerId,
             u.image AS user_image,
             u.profile_name AS user_nickname,
             u.rank AS user_rank,
