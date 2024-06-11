@@ -12,10 +12,8 @@ import javaeatsong.goteat.model.Reviews;
 public interface ReviewsMapper {
 	List<HashMap<String, Object>> selectList(@Param("uid") String uid) throws Exception;
 
-	Reviews select(int id) throws Exception;
-
 	void insert(Reviews param) throws Exception;
-	
+
 	void insertPointHistory(int userId);
 
 	void update(Reviews param) throws Exception;

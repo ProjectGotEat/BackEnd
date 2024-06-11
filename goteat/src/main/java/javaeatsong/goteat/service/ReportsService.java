@@ -11,8 +11,8 @@ public class ReportsService {
 
 	@Autowired
 	private ReportsMapper reportsMapper;
-    
+
 	public void postReport(Reports report) throws Exception {
-        reportsMapper.insert(report);
-    }
+		reportsMapper.insert(report);
+	}
 }

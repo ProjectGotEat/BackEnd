@@ -1,17 +1,11 @@
 package javaeatsong.goteat.repository;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import javaeatsong.goteat.model.Reports;
 
 @Mapper
 public interface ReportsMapper {
-	List<Reports> selectList() throws Exception;
-
-	Reports select(int id) throws Exception;
-
 	void insert(Reports param) throws Exception;
 
 	void update(Reports param) throws Exception;

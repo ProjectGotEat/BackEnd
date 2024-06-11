@@ -15,25 +15,23 @@ public class BoardsService {
 	@Autowired
 	private BoardsMapper boardsMapper;
 
-	public List<HashMap<String, Object>> getBoard(String uid, String keyword, String category)
-			throws Exception {
+	public List<HashMap<String, Object>> getBoard(String uid, String keyword, String category) throws Exception {
 		return boardsMapper.selectList(uid, keyword, category);
 	}
 
-	public HashMap<String, Object> getBoardDetail(String uid, int bid)
-			throws Exception {
+	public HashMap<String, Object> getBoardDetail(String uid, int bid) throws Exception {
 		return boardsMapper.selectDetail(uid, bid);
 	}
 
-    public void postBoard(Boards board) throws Exception {
-        boardsMapper.insert(board);
-    }
-    
-    public void insertPointHistory(int userId) {
-        boardsMapper.insertPointHistory(userId);
-    }
-    
-    public void decrementRemainHeadcnt(int bid) throws Exception {
-        boardsMapper.decrementRemainHeadcnt(bid);
-    }
+	public void postBoard(Boards board) throws Exception {
+		boardsMapper.insert(board);
+	}
+
+	public void insertPointHistory(int userId) {
+		boardsMapper.insertPointHistory(userId);
+	}
+
+	public void decrementRemainHeadcnt(int bid) throws Exception {
+		boardsMapper.decrementRemainHeadcnt(bid);
+	}
 }

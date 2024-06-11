@@ -1,16 +1,9 @@
 package javaeatsong.goteat.model;
 
-import lombok.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Boards {
 	private Integer id;
     @JsonProperty("user_id")

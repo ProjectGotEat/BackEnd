@@ -12,8 +12,6 @@ import javaeatsong.goteat.model.Scraps;
 public interface ScrapsMapper {
 	List<HashMap<String, Object>> selectList(@Param("uid") String uid) throws Exception;
 
-	Scraps select(int id) throws Exception;
-
 	void insert(Scraps param) throws Exception;
 
 	void update(Scraps param) throws Exception;

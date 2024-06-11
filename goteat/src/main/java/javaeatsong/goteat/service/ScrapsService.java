@@ -19,7 +19,7 @@ public class ScrapsService {
 		return scrapsMapper.selectList(uid);
 	}
 
-    public void postScrap(Scraps scrap) throws Exception {
-        scrapsMapper.insert(scrap);
-    }
+	public void postScrap(Scraps scrap) throws Exception {
+		scrapsMapper.insert(scrap);
+	}
 }

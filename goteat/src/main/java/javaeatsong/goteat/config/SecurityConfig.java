@@ -1,4 +1,4 @@
-package javaeatsong.goteat;
+package javaeatsong.goteat.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
