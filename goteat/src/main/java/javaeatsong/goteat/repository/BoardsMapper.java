@@ -14,15 +14,13 @@ public interface BoardsMapper {
 			@Param("category") String category) throws Exception;
 
 	HashMap<String, Object> selectDetail(@Param("uid") String uid, @Param("id") int bid) throws Exception;
-	
-	Boards select(int id) throws Exception;
 
-    void decrementRemainHeadcnt(int bid) throws Exception;
-	
+	void decrementRemainHeadcnt(int bid) throws Exception;
+
 	void insert(Boards param) throws Exception;
 
 	void insertPointHistory(int userId);
-	
+
 	void update(Boards param) throws Exception;
 
 	void delete(Boards param) throws Exception;

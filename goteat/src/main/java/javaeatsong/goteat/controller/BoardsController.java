@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,24 +22,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @RestController
 public class BoardsController {
 
-    @Value("${file.upload-dir}")
-    private String uploadDir;
-	
+	@Value("${file.upload-dir}")
+	private String uploadDir;
+
 	private final BoardsService boardsService;
 
 	public BoardsController(BoardsService boardsService) {
@@ -72,63 +65,62 @@ public class BoardsController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(boardsService.getBoard(uid, keyword, category));
 	}
-	
+
 	@GetMapping("/board/{id}")
-	public HashMap<String, Object> getBoardDetail(@PathVariable("id") int bid,
-			@RequestHeader("uid") String uid) throws Exception {
+	public HashMap<String, Object> getBoardDetail(@PathVariable("id") int bid, @RequestHeader("uid") String uid)
+			throws Exception {
 		return boardsService.getBoardDetail(uid, bid);
 	}
-	
 
 	@PostMapping(value = "/board", consumes = "multipart/form-data")
-    public ResponseEntity<String> postBoard(
-            @RequestPart("item_image1") MultipartFile itemImage1,
-            @RequestPart("receipt_image") MultipartFile itemImage2,
-            @RequestPart("board") String boardJson,
-            @RequestHeader("uid") int uid) throws Exception {
+	public ResponseEntity<String> postBoard(@RequestPart("item_image1") MultipartFile itemImage1,
+			@RequestPart("receipt_image") MultipartFile itemImage2, @RequestPart("board") String boardJson,
+			@RequestHeader("uid") int uid) throws Exception {
 
-        // JSON 문자열을 Boards 객체로 변환
-        ObjectMapper objectMapper = new ObjectMapper();
-        Boards board = objectMapper.readValue(boardJson, Boards.class);
+		// JSON 문자열을 Boards 객체로 변환
+		ObjectMapper objectMapper = new ObjectMapper();
+		Boards board = objectMapper.readValue(boardJson, Boards.class);
 
-        board.setUserId(uid);
+		board.setUserId(uid);
 
-        // 파일 처리
-        if (!itemImage1.isEmpty()) {
-            try {
-                Path path = Paths.get(uploadDir + File.separator + itemImage1.getOriginalFilename());
-                Files.write(path, itemImage1.getBytes());
-                String fileUrl = "http://goteat-project-goteat-fbd23032.koyeb.app/uploads/" + itemImage1.getOriginalFilename();
-                board.setItemImage1(fileUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload item_image1");
-            }
-        }
+		// 파일 처리
+		if (!itemImage1.isEmpty()) {
+			try {
+				Path path = Paths.get(uploadDir + File.separator + itemImage1.getOriginalFilename());
+				Files.write(path, itemImage1.getBytes());
+				String fileUrl = "http://goteat-project-goteat-fbd23032.koyeb.app/uploads/"
+						+ itemImage1.getOriginalFilename();
+				board.setItemImage1(fileUrl);
+			} catch (IOException e) {
+				e.printStackTrace();
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload item_image1");
+			}
+		}
 
-        if (!itemImage2.isEmpty()) {
-            try {
-                Path path = Paths.get(uploadDir + File.separator + itemImage2.getOriginalFilename());
-                Files.write(path, itemImage2.getBytes());
-                String fileUrl = "http://goteat-project-goteat-fbd23032.koyeb.app/uploads/" + itemImage2.getOriginalFilename();
-                board.setReceiptImage(fileUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload item_image2");
-            }
-        }
+		if (!itemImage2.isEmpty()) {
+			try {
+				Path path = Paths.get(uploadDir + File.separator + itemImage2.getOriginalFilename());
+				Files.write(path, itemImage2.getBytes());
+				String fileUrl = "http://goteat-project-goteat-fbd23032.koyeb.app/uploads/"
+						+ itemImage2.getOriginalFilename();
+				board.setReceiptImage(fileUrl);
+			} catch (IOException e) {
+				e.printStackTrace();
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload item_image2");
+			}
+		}
 
-        boardsService.postBoard(board);
-        if (board.getIsUp() != null && board.getIsUp()) {
-            boardsService.insertPointHistory(uid);
-        }
+		boardsService.postBoard(board);
+		if (board.getIsUp() != null && board.getIsUp()) {
+			boardsService.insertPointHistory(uid);
+		}
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Board created successfully");
-    }
-	
+		return ResponseEntity.status(HttpStatus.CREATED).body("Board created successfully");
+	}
+
 	@PutMapping("/board/{id}/request")
 	public ResponseEntity<String> decrementReaminHeadcnt(@PathVariable("id") int bid) throws Exception {
 		boardsService.decrementRemainHeadcnt(bid);
-       return ResponseEntity.status(HttpStatus.CREATED).body("Remain Headcnt decremented successfully");
+		return ResponseEntity.status(HttpStatus.CREATED).body("Remain Headcnt decremented successfully");
 	}
 }

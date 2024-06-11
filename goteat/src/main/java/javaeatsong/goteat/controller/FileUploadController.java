@@ -16,24 +16,24 @@ import java.nio.file.Paths;
 @RequestMapping("/api")
 public class FileUploadController {
 
-    @Value("${file.upload-dir}")
-    private String uploadDir;
+	@Value("${file.upload-dir}")
+	private String uploadDir;
 
-    @PostMapping(value = "/upload", consumes = "multipart/form-data")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is empty");
-        }
+	@PostMapping(value = "/upload", consumes = "multipart/form-data")
+	public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
+		if (file.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is empty");
+		}
 
-        try {
-            // 저장 경로를 설정합니다.
-            Path path = Paths.get(uploadDir + File.separator + file.getOriginalFilename());
-            Files.write(path, file.getBytes());
-            String fileUrl = "http://goteat-project-goteat-fbd23032.koyeb.app/uploads/" + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully: " + fileUrl);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
-        }
-    }
+		try {
+			// 저장 경로를 설정합니다.
+			Path path = Paths.get(uploadDir + File.separator + file.getOriginalFilename());
+			Files.write(path, file.getBytes());
+			String fileUrl = "http://goteat-project-goteat-fbd23032.koyeb.app/uploads/" + file.getOriginalFilename();
+			return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully: " + fileUrl);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
+		}
+	}
 }

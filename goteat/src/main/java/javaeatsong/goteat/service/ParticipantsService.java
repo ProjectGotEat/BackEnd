@@ -23,18 +23,19 @@ public class ParticipantsService {
 
 	@Autowired
 	private MessagesMapper messagesMapper;
-	
+
 	// 소분 참여하기
 	public int postParticipant(Participants participant) throws Exception {
-        return participantsMapper.insert(participant);
-    }
+		return participantsMapper.insert(participant);
+	}
 
 	// 내가 주최한 소분 전체 조회
 	public List<HashMap<String, Object>> getParticipantsOrganized(int uid) throws Exception {
 		List<HashMap<String, Object>> participantsList = participantsMapper.selectListByOrganizerId(uid);
 		participantsList.forEach(participants -> {
 			int personal_quantity = (int) participants.get("quantity") / (int) participants.get("headcnt");
-			String card_title = String.valueOf(participants.get("item_name"))+ " " + Integer.toString(personal_quantity) + String.valueOf(participants.get("scale"));
+			String card_title = String.valueOf(participants.get("item_name")) + " "
+					+ Integer.toString(personal_quantity) + String.valueOf(participants.get("scale"));
 			participants.put("title", card_title);
 		});
 
@@ -57,7 +58,8 @@ public class ParticipantsService {
 			participant.put("user_id", user_id);
 
 			data.add(participant);
-		};
+		}
+		;
 
 		return data;
 	}
@@ -67,7 +69,8 @@ public class ParticipantsService {
 		List<HashMap<String, Object>> participantsList = participantsMapper.selectListByUserId(uid);
 		participantsList.forEach(participants -> {
 			int personal_quantity = (int) participants.get("quantity") / (int) participants.get("headcnt");
-			String card_title = String.valueOf(participants.get("item_name")) + " " + Integer.toString(personal_quantity) + String.valueOf(participants.get("scale"));
+			String card_title = String.valueOf(participants.get("item_name")) + " "
+					+ Integer.toString(personal_quantity) + String.valueOf(participants.get("scale"));
 			participants.put("title", card_title);
 		});
 
@@ -90,7 +93,8 @@ public class ParticipantsService {
 			participant.put("user_id", user_id);
 
 			data.add(participant);
-		};
+		}
+		;
 
 		return data;
 	}
@@ -100,7 +104,8 @@ public class ParticipantsService {
 		List<HashMap<String, Object>> participantsList = participantsMapper.selectListEndedByOrganizerUserId(uid);
 		participantsList.forEach(participants -> {
 			int personal_quantity = (int) participants.get("quantity") / (int) participants.get("headcnt");
-			String card_title = String.valueOf(participants.get("item_name")) + " " + Integer.toString(personal_quantity) + String.valueOf(participants.get("scale"));
+			String card_title = String.valueOf(participants.get("item_name")) + " "
+					+ Integer.toString(personal_quantity) + String.valueOf(participants.get("scale"));
 			participants.put("title", card_title);
 		});
 
@@ -123,7 +128,8 @@ public class ParticipantsService {
 			participant.put("user_id", user_id);
 
 			data.add(participant);
-		};
+		}
+		;
 
 		return data;
 	}
@@ -160,8 +166,8 @@ public class ParticipantsService {
 
 	// 소분 성공 처리
 	public int putParticipantSuccess(int pid, int uid) throws Exception {
-		if (participantsMapper.updateIsSuccess (pid, uid) == 1) {
-			participantsMapper.updateIsFinished (pid);
+		if (participantsMapper.updateIsSuccess(pid, uid) == 1) {
+			participantsMapper.updateIsFinished(pid);
 			return 1;
 		} else {
 			return 0;
@@ -170,7 +176,7 @@ public class ParticipantsService {
 
 	// 소분 실패 처리
 	public int putParticipantFail(int pid, int uid) throws Exception {
-		if (participantsMapper.updateIsFailed (pid, uid) == 1) {
+		if (participantsMapper.updateIsFailed(pid, uid) == 1) {
 			return 1;
 		} else {
 			return 0;
