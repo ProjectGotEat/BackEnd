@@ -22,4 +22,8 @@ public class ScrapsService {
 	public void postScrap(Scraps scrap) throws Exception {
 		scrapsMapper.insert(scrap);
 	}
+
+	public void deleteScrap(Scraps scrap) throws Exception {
+		scrapsMapper.delete(scrap);
+	}
 }

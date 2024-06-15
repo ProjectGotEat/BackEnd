@@ -31,4 +31,11 @@
 		INSERT INTO scraps(user_id, board_id)
 		VALUES(#{userId}, #{boardId})
 	</insert>
+	
+	<delete id="delete"
+		parameterType="javaeatsong.goteat.model.Scraps">
+		DELETE FROM scraps
+		WHERE user_id = #{userId}
+		AND board_id = #{boardId}
+	</delete>
 </mapper>
