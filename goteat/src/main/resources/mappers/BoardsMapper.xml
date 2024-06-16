@@ -45,7 +45,15 @@
             b.latitude,
             b.longitude,
             b.is_finished,
-            b.is_reusable
+            b.is_reusable,
+            CASE
+				WHEN EXISTS (
+					SELECT 1
+					FROM participants p
+					WHERE p.board_id = b.id AND p.user_id = #{uid}
+				) THEN 1
+				ELSE 0
+			END AS is_requested
         FROM boards b
         JOIN users u ON b.user_id = u.id
         JOIN board_categories bc ON b.category_id = bc.id
