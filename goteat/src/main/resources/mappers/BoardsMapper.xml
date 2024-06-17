@@ -10,7 +10,7 @@
         		CAST(b.total_price / b.headcnt AS SIGNED INTEGER) AS each_price,
         		b.meeting_location,
         		b.headcnt,
-        		b.headcnt - b.remain_headcnt AS participants_headcnt,
+        		(SELECT COUNT(*) FROM participants p WHERE p.board_id = b.id) AS participants_headcnt,
         		bc.content AS category,
         		b.is_finished,
         		IF(s.board_id IS NOT NULL, 1, 0) AS is_scraped,
@@ -22,6 +22,19 @@
 		<if test="category != null and !category.isEmpty()">
       		AND b.category_id = #{category}
    		</if>
+   		GROUP BY
+				b.id,
+				b.item_name,
+				b.quantity,
+				b.scale,
+				each_quantity,
+				each_price,
+				b.meeting_location,
+				b.headcnt,
+				participants_headcnt,
+				bc.content,
+				b.is_finished,
+				b.item_image1
 		ORDER BY is_up DESC, b.id DESC;
 	</select>
 	
@@ -53,7 +66,11 @@
 					WHERE p.board_id = b.id AND p.user_id = #{uid}
 				) THEN 1
 				ELSE 0
-			END AS is_requested
+			END AS is_requested,
+			CASE
+				WHEN (SELECT COUNT(*) FROM participants p WHERE p.board_id = b.id) = b.headcnt THEN 1
+				ELSE 0
+			END AS is_full
         FROM boards b
         JOIN users u ON b.user_id = u.id
         JOIN board_categories bc ON b.category_id = bc.id
