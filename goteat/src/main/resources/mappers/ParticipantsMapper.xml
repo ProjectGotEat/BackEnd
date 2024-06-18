@@ -58,7 +58,13 @@
             FROM messages
         )
         SELECT b.item_name, b.meeting_time, b.quantity, b.headcnt, b.scale,
-               p.id as participant_id, p.organizer_id, p.user_id, rm.content
+               p.id as participant_id, p.organizer_id, p.user_id, rm.content,
+               CASE WHEN EXISTS (
+					SELECT 1
+					FROM reviews r
+					WHERE r.participant_id = p.id
+					  AND r.reviewer_id = #{uid}
+			   ) THEN 1 ELSE 0 END AS has_review
         FROM participants p
                  JOIN boards b
                       ON p.board_id = b.id
