@@ -10,7 +10,9 @@
         		CAST(b.total_price / b.headcnt AS SIGNED INTEGER) AS each_price,
         		b.meeting_location,
         		b.headcnt,
-        		(SELECT COUNT(*) FROM participants p WHERE p.board_id = b.id) AS participants_headcnt,
+        		<![CDATA[
+        		(SELECT COUNT(*) FROM participants p WHERE p.board_id = b.id AND p.is_failed <> 1) AS participants_headcnt,
+        		]]>
         		bc.content AS category,
         		b.is_finished,
         		IF(s.board_id IS NOT NULL, 1, 0) AS is_scraped,
@@ -68,7 +70,9 @@
 				ELSE 0
 			END AS is_requested,
 			CASE
-				WHEN (SELECT COUNT(*) FROM participants p WHERE p.board_id = b.id) = b.headcnt THEN 1
+        		<![CDATA[
+				WHEN (SELECT COUNT(*) FROM participants p WHERE p.board_id = b.id AND p.is_failed <> 1) = b.headcnt THEN 1
+				]]>
 				ELSE 0
 			END AS is_full
         FROM boards b

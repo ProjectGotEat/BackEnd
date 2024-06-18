@@ -11,7 +11,9 @@
         	CAST(b.total_price / b.headcnt AS SIGNED INTEGER) AS each_price,
             b.meeting_location AS meetingLocation,
             b.headcnt AS headcnt,
-            (SELECT COUNT(*) FROM participants p WHERE p.board_id = b.id) AS participantsHeadcnt,
+            <![CDATA[
+            (SELECT COUNT(*) FROM participants p WHERE p.board_id = b.id AND p.is_failed <> 1) AS participants_headcnt,
+            ]]>
             c.content AS category,
             b.is_finished AS isFinished,
             1 AS isScraped,
