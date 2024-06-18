@@ -10,7 +10,7 @@
         		CAST(b.total_price / b.headcnt AS SIGNED INTEGER) AS each_price,
         		b.meeting_location,
         		b.headcnt,
-        		(SELECT COUNT(*) FROM participants p WHERE p.board_id = b.id) AS participants_headcnt,
+        		(SELECT COUNT(*) FROM participants p WHERE p.board_id = b.id AND p.is_failed <> 1) AS participants_headcnt,
         		bc.content AS category,
         		b.is_finished,
         		IF(s.board_id IS NOT NULL, 1, 0) AS is_scraped,
