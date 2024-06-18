@@ -59,7 +59,6 @@ public class ParticipantsService {
 
 			data.add(participant);
 		}
-		;
 
 		return data;
 	}
@@ -94,7 +93,6 @@ public class ParticipantsService {
 
 			data.add(participant);
 		}
-		;
 
 		return data;
 	}
@@ -118,6 +116,7 @@ public class ParticipantsService {
 			Object id = participantsList.get(i).get("participant_id");
 			Object organizer_id = participantsList.get(i).get("organizer_id");
 			Object user_id = participantsList.get(i).get("user_id");
+			Object has_review = participantsList.get(i).get("has_review");
 
 			HashMap<String, Object> participant = new HashMap<String, Object>();
 			participant.put("id", id);
@@ -126,10 +125,10 @@ public class ParticipantsService {
 			participant.put("message", content);
 			participant.put("organizer_id", organizer_id);
 			participant.put("user_id", user_id);
+			participant.put("has_review", has_review);
 
 			data.add(participant);
 		}
-		;
 
 		return data;
 	}
