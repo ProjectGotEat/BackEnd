@@ -31,7 +31,4 @@ public class BoardsService {
 		boardsMapper.insertPointHistory(userId);
 	}
 
-	public void decrementRemainHeadcnt(int bid) throws Exception {
-		boardsMapper.decrementRemainHeadcnt(bid);
-	}
 }

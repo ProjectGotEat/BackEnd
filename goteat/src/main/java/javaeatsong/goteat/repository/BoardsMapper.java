@@ -15,8 +15,6 @@ public interface BoardsMapper {
 
 	HashMap<String, Object> selectDetail(@Param("uid") String uid, @Param("id") int bid) throws Exception;
 
-	void decrementRemainHeadcnt(int bid) throws Exception;
-
 	void insert(Boards param) throws Exception;
 
 	void insertPointHistory(int userId);

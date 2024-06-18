@@ -117,10 +117,4 @@ public class BoardsController {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body("Board created successfully");
 	}
-
-	@PutMapping("/board/{id}/request")
-	public ResponseEntity<String> decrementReaminHeadcnt(@PathVariable("id") int bid) throws Exception {
-		boardsService.decrementRemainHeadcnt(bid);
-		return ResponseEntity.status(HttpStatus.CREATED).body("Remain Headcnt decremented successfully");
-	}
 }

@@ -104,14 +104,7 @@
     	INSERT INTO point_histories (user_id, change_point, change_reason)
     	VALUES (#{userId}, -30, '게시글 상단 고정(-30)')
 	</insert>
-
 	
-	<update id="decrementRemainHeadcnt">
-    UPDATE boards
-    SET remain_headcnt = remain_headcnt - 1
-    WHERE id = #{bid} AND remain_headcnt > 0
-	</update>
-
 	<select id="selectOverview" resultType="Map">
 		SELECT b.item_name, b.quantity, b.headcnt, b.scale, b.meeting_location, b.meeting_time, p.id as participant_id
 		FROM boards b
