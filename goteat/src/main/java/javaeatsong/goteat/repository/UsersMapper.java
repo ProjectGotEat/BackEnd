@@ -13,7 +13,7 @@ public interface UsersMapper {
 
 	void insert(Users param) throws Exception;
 
-	void update(Users param) throws Exception;
+	int update(Users param) throws Exception;
 
 	void delete(Users param) throws Exception;
 }

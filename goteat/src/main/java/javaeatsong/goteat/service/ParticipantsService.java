@@ -117,6 +117,7 @@ public class ParticipantsService {
 			Object organizer_id = participantsList.get(i).get("organizer_id");
 			Object user_id = participantsList.get(i).get("user_id");
 			Object has_review = participantsList.get(i).get("has_review");
+			Object has_report = participantsList.get(i).get("has_report");
 
 			HashMap<String, Object> participant = new HashMap<String, Object>();
 			participant.put("id", id);
@@ -126,6 +127,7 @@ public class ParticipantsService {
 			participant.put("organizer_id", organizer_id);
 			participant.put("user_id", user_id);
 			participant.put("has_review", has_review);
+			participant.put("has_report", has_report);
 
 			data.add(participant);
 		}

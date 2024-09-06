@@ -16,6 +16,9 @@ public class Users {
 	private Integer notiAllow;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
+	private String preferredLocation;
+	private double preferredLatitude;
+	private double preferredLongitude;
 
 	public Integer getId() {
 		return id;
@@ -113,11 +116,37 @@ public class Users {
 		this.updatedAt = updatedAt;
 	}
 
+	public double getPreferredLatitude() {
+		return preferredLatitude;
+	}
+
+	public void setPreferredLatitude(double preferredLatitude) {
+		this.preferredLatitude = preferredLatitude;
+	}
+
+	public double getPreferredLongitude() {
+		return preferredLongitude;
+	}
+
+	public void setPreferredLongitude(double preferredLongitude) {
+		this.preferredLongitude = preferredLongitude;
+	}
+
+	public String getPreferredLocation() {
+		return preferredLocation;
+	}
+
+	public void setPreferredLocation(String preferredLocation) {
+		this.preferredLocation = preferredLocation;
+	}
+
 	@Override
 	public String toString() {
-		return "UsersDTO [id=" + id + ", name=" + name + ", profileName=" + profileName + ", image=" + image
-				+ ", email=" + email + ", password=" + password + ", rank=" + rank + ", point=" + point
-				+ ", suspensionDate=" + suspensionDate + ", notiAllow=" + notiAllow + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + "]";
+		return "Users [id=" + id + ", name=" + name + ", profileName=" + profileName + ", image=" + image + ", email="
+				+ email + ", password=" + password + ", rank=" + rank + ", point=" + point + ", suspensionDate="
+				+ suspensionDate + ", notiAllow=" + notiAllow + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", preferredLocation=" + preferredLocation + ", preferredLatitude=" + preferredLatitude
+				+ ", preferredLongitude=" + preferredLongitude + "]";
 	}
+
 }

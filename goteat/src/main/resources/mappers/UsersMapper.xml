@@ -16,6 +16,9 @@
 			image,
 			email,
 			password,
+			preferred_location,
+			preferred_latitude,
+			preferred_longitude,
 			`rank`, <!-- rank가 MySQL의 예약어이므로, 앞뒤를 백틱으로 감싸줌 -->
 			point,
 			noti_allow)
@@ -25,8 +28,18 @@
 			#{image},
 			#{email},
 			#{password},
+			#{preferredLocation},
+			#{preferredLatitude},
+			#{preferredLongitude},
 			#{rank},
 			#{point},
 			#{notiAllow})
 	</insert>
+	<update id="update">
+		UPDATE users
+		   SET preferred_location = #{preferredLocation},
+		   	   preferred_latitude = #{preferredLatitude},
+		   	   preferred_longitude = #{preferredLongitude}
+		 WHERE id = #{id};
+	</update>
 </mapper>
