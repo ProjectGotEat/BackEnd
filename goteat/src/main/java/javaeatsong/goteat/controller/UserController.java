@@ -4,6 +4,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +14,7 @@ import javaeatsong.goteat.service.UserService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -51,5 +54,19 @@ public class UserController {
 		List<HashMap<String, Object>> responseMapList = userService.getUserPoint(uid);
 
 		return ResponseEntity.status(HttpStatus.OK).body(responseMapList);
+	}
+	
+	@PutMapping("/user/location")
+	public ResponseEntity<String> putUserLocation(@RequestHeader("uid") int uid, @RequestBody Map<String, ?> requestBody)
+			throws Exception {
+		String preferredLocation = requestBody.get("preferred_location").toString();
+		double preferredLatitude = (double) requestBody.get("preferred_latitude");
+		double preferredLongitude = (double) requestBody.get("preferred_longitude");
+
+		if (userService.putUserLocation(uid, preferredLocation, preferredLatitude, preferredLongitude) == 1) {
+			return ResponseEntity.status(HttpStatus.OK).body("successfully updated");
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no matching user");
+		}
 	}
 }

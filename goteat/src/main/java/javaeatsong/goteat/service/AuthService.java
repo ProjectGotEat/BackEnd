@@ -29,6 +29,8 @@ public class AuthService {
 		if (passwordEncoder.matches(rawPassword, users.getPassword())) {
 			HashMap<String, Object> response = new HashMap<>();
 			response.put("uid", users.getId());
+			response.put("preferred_latitude", users.getPreferredLatitude());
+			response.put("preferred_longitude", users.getPreferredLongitude());
 			return response;
 		} else {
 			return null;

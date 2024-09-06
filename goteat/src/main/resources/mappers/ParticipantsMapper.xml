@@ -64,7 +64,13 @@
 					FROM reviews r
 					WHERE r.participant_id = p.id
 					  AND r.reviewer_id = #{uid}
-			   ) THEN 1 ELSE 0 END AS has_review
+			   ) THEN 1 ELSE 0 END AS has_review,
+			   CASE WHEN EXISTS (
+					SELECT 1
+					FROM reports rp
+					WHERE rp.participant_id = p.id
+					  AND rp.reporter_id = #{uid}
+			   ) THEN 1 ELSE 0 END AS has_report
         FROM participants p
                  JOIN boards b
                       ON p.board_id = b.id

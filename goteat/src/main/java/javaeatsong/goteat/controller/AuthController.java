@@ -55,6 +55,9 @@ public class AuthController {
 				e.printStackTrace();
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload item_image1");
 			}
+		} else { // 등록할 이미지가 없으면 기본 이미지의 url로 등록
+			String fileUrl = "https://drive.google.com/uc?export=view&id=1H2X3asQNBrUreHT3QGKzjd26r1Z_LBmr";
+			user.setImage(fileUrl);
 		}
 
 		authService.postAuthJoin(user);
@@ -75,7 +78,11 @@ public class AuthController {
 		HashMap<String, Object> response = authService.postAuthLogin(email, password);
 		if (response != null) {
 			Integer uid = (Integer) response.get("uid");
+			double preferredLatitude = (double) response.get("preferred_latitude");
+			double preferredLongitude = (double) response.get("preferred_longitude");
 			response.put("uid", uid);
+			response.put("preferred_latitude", preferredLatitude);
+			response.put("preferred_longitude", preferredLongitude);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HashMap<>());
