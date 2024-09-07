@@ -20,10 +20,10 @@ public interface ParticipantsMapper {
 
 	int insert(Participants param) throws Exception;
 
-	int updateIsSuccess(int id, int uid) throws Exception;
+	int updateIsSuccess(@Param("id") int id, @Param("uid") int uid) throws Exception;
 
 	int updateIsFinished(int pid) throws Exception;
 
-	int updateIsFailed(int id, int uid) throws Exception;
+	int updateIsFailed(@Param("id") int id, @Param("uid") int uid) throws Exception;
 
 }
